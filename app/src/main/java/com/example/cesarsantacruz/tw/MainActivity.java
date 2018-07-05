@@ -24,9 +24,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-<<<<<<< HEAD
-        //km,mkmlklkml
-=======
 
         //                                                  //Ubicamos el recycler view en nuestro archivo XML
         mRecyclerView = findViewById(R.id.recycler_view);
@@ -65,6 +62,5 @@ public class MainActivity extends AppCompatActivity {
         twitterFeed = new TwitterFeed("probando probando probando", "perro chido",
                 "@perro123", 0, R.drawable.perro, 4, 1);
         arrstrTweets.add(twitterFeed);
->>>>>>> 955d01dc2a8e32d3444dc1b311d4bbfe26c61e92
     }
 }
