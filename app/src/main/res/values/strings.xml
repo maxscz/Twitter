@@ -10,7 +10,9 @@
     <string name="tweet">I´m new to the GitHub, and trying to push my project to the GitHub from VCS of Android Studio.
         When I do this it commits and pushes only .java files and no other files like resources etc.</string>
     <string name="agregar">Nuevo Tweet</string>
-
-
+    <string name="profile_like">Profile 2.0</string>
+    <string name="usuario_like">"@gato321"</string>
+    <string name="fecha">27/08/2018</string>
+    <string name="hora">3:43 p.m.</string>
 
 </resources>

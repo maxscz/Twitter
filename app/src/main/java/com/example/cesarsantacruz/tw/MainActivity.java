@@ -1,11 +1,14 @@
 package com.example.cesarsantacruz.tw;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -15,42 +18,49 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<TwitterFeed> arrstrTweets;
     RecyclerViewAdapter recyclerViewAdapter;
     Context context;
+    TextView likesView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //                                                  //Ubicamos el recycler view en nuestro archivo XML
         mRecyclerView = findViewById(R.id.recycler_view);
 
-        recyclerViewAdapter = new RecyclerViewAdapter(this);
+        //                                                  //Llenamos de informacion nuestro RecyclerView
+        GetData();
+        //                                                  //Configuración del adaptador para el RecyclerView
+        recyclerViewAdapter = new RecyclerViewAdapter(this, arrstrTweets);
         mRecyclerView.setAdapter(recyclerViewAdapter);
 
         LinearLayoutManager manager = new LinearLayoutManager(getApplicationContext(),
                 LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(manager);
 
-        GetData();
     }
 
     public void GetData () {
         arrstrTweets = new ArrayList<>();
-        TwitterFeed twitterFeed = new TwitterFeed("probando probando probando probando", R.drawable.perro);
-        arrstrTweets.add(twitterFeed);
-        ((RecyclerViewAdapter)this.mRecyclerView.getAdapter()).addData(arrstrTweets);
 
-        twitterFeed = new TwitterFeed("estoy probando un poco mas");
+        TwitterFeed twitterFeed = new TwitterFeed("probando probando probando", "perro chido",
+                "@perro123", R.drawable.perro, R.drawable.perro, 4, 6);
         arrstrTweets.add(twitterFeed);
-        ((RecyclerViewAdapter)this.mRecyclerView.getAdapter()).addData(arrstrTweets);
 
-        twitterFeed = new TwitterFeed("NO maaa, estos tweets estan bien chidoooos #12ayados", R.drawable.perro);
+        twitterFeed = new TwitterFeed("probando probando probando", "perro chido",
+                "@perro123", 0, R.drawable.perro, 23, 8);
         arrstrTweets.add(twitterFeed);
-        ((RecyclerViewAdapter)this.mRecyclerView.getAdapter()).addData(arrstrTweets);
 
-        twitterFeed = new TwitterFeed("Lorem Ipsum fpani Dnmfpi Pidnkj JD DmKDJ DK dnknds kjshfjksoiesne k");
+        twitterFeed = new TwitterFeed("probando probando probando", "perro chido",
+                "@perro123", R.drawable.perro, R.drawable.perro, 22, 13);
         arrstrTweets.add(twitterFeed);
-        ((RecyclerViewAdapter)this.mRecyclerView.getAdapter()).addData(arrstrTweets);
 
-        recyclerViewAdapter.notifyDataSetChanged();
+        twitterFeed = new TwitterFeed("probando probando probando", "perro chido",
+                "@perro123", R.drawable.perro, R.drawable.perro, 15, 6);
+        arrstrTweets.add(twitterFeed);
+
+        twitterFeed = new TwitterFeed("probando probando probando", "perro chido",
+                "@perro123", 0, R.drawable.perro, 4, 1);
+        arrstrTweets.add(twitterFeed);
     }
 }
