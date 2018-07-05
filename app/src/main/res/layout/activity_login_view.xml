@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".LoginView">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8"
+        android:orientation="vertical"
+        android:background="#FFFFFF">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/mytoolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="24dp"
+                android:gravity="right"
+                android:text="@string/strLogingTitle"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:textColor="#0084b4"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+
+
+
+        </android.support.v7.widget.Toolbar>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:text="@string/strInitialHeader"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/strUserHeader" />
+
+        <EditText
+            android:id="@+id/activity_loging_etUserLoging"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="24dp"
+            android:text="@string/strPasswordHeader" />
+
+        <EditText
+            android:id="@+id/activity_loging_etPasswordLoging"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:inputType="textPassword"
+            />
+
+        <Button
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="#FFFFFF"
+            android:text="@string/strForgotYourPassword"
+            android:textAllCaps="false"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="16dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="right"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/activity_loging_view_btLogingButton"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/change_button_status"
+            android:enabled="false"
+            android:text="@string/strLoging"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+    </LinearLayout>
+</LinearLayout>

@@ -6,4 +6,16 @@
     <string name="likes">Likes</string>
     <string name="comment">Comments</string>
     <string name="about_us">About us</string>
+    <string name="strInitialHeader">Iniciar sesión en Twitter.</string>
+    <string name="strUserHeader">Usuario</string>
+    <string name="strPasswordHeader">Contraseña</string>
+    <string name="strForgotYourPassword">¿Olvidaste tu contraseña?</string>
+    <string name="strLoging">Inicia sesión</string>
+    <string name="strLogingTitle">Regístrate</string>
+    <string name="strNewAccount">Crea tu cuenta</string>
+    <string name="strNameForNewAccount">Nombre</string>
+    <string name="strEmailOrCellphone">Tel. o correo electrónico</string>
+    <string name="strNextButton">Siguiente</string>
+    <string name="strWhatHappendHint">¿Qué estás haciendo?</string>
+    <string name="strCreateTweet">Twittear</string>
 </resources>

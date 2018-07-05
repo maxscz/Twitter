@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    tools:context=".activity_NewTweet"
+    android:layout_gravity="center">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/activity_new_tweet_toolbar_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layoutDirection="rtl">
+
+        <Button
+            android:id="@+id/activity_new_tweet_toolbar_btnNewTweet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/strCreateTweet"
+            android:background="@drawable/change_button_status"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:enabled="false"
+            />
+    </android.support.v7.widget.Toolbar>
+    <EditText
+        android:id="@+id/activity_new_tweet_etNewTweet"
+        android:layout_width="match_parent"
+        android:layout_height="200sp"
+        android:hint="@string/strWhatHappendHint"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+        android:maxLength="120"
+        android:layout_gravity="start"
+        android:backgroundTint="@android:color/white"
+        android:layout_below="@id/activity_new_tweet_toolbar_toolbar"/>
+        
+        <ProgressBar
+            android:id="@+id/activity__new_tweet_pbarCharCounter"
+            android:indeterminate="false"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:progressDrawable="@drawable/progress_determinate_circular_bar"
+            android:secondaryProgressTint="@android:color/darker_gray"
+            android:progress="0"
+            android:max="120"
+            android:layout_width="100dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_height="150dp"
+            android:layout_below="@id/activity_new_tweet_etNewTweet"
+            />
+
+
+
+</RelativeLayout>
