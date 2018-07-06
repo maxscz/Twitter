@@ -15,7 +15,8 @@ public class TwitterFeed {
     String comentario;
 
     //                                                      //Constructor para la estructura de los tweets
-    public TwitterFeed(String tweet, String name, String user, int picture, int profilePicture, int likes, int comments) {
+    public TwitterFeed(String tweet, String name, String user, int picture, int profilePicture, int likes, int comments,
+                       ArrayList<String> urlPictures) {
         this.tweet = tweet;
         this.name = name;
         this.user = user;
@@ -26,13 +27,14 @@ public class TwitterFeed {
         this.urlPictures = urlPictures;
     }
 
-    public TwitterFeed(int profilePicture, String name, String user, String fecha, ArrayList urlPictures) {
+    public TwitterFeed(int profilePicture, String name, String user, String fecha,String comentario, ArrayList urlPictures) {
     //                                                      //Constructor sobrecargado para los likes
         this.profilePicture = profilePicture;
         this.name = name;
         this.user = user;
         this.fecha = fecha;
         this.urlPictures = urlPictures;
+        this.comentario=comentario;
     }
 
     public String getTweet() {

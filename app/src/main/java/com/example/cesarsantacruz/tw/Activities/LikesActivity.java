@@ -49,7 +49,7 @@ public class LikesActivity extends MainActivity {
         fecha = simpleDateFormat.format(calendar.getTime());
 
         arrstrLikes = new ArrayList<>();
-        TwitterFeed twitterLikes = new TwitterFeed(R.drawable.gato, "GatoChido", "@gatuno123", fecha);
+        TwitterFeed twitterLikes = new TwitterFeed(R.drawable.gato, "GatoChido", "@gatuno123", fecha, "",new ArrayList());
         arrstrLikes.add(twitterLikes);
 
     }
