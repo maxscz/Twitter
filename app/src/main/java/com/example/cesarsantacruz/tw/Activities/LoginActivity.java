@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.cesarsantacruz.tw.Activities.MainActivity;
 import com.example.cesarsantacruz.tw.R;
 
 //======================================================================================================================
@@ -28,7 +29,7 @@ public class LoginActivity extends AppCompatActivity implements TextWatcher, Vie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_view);
                                                             //Asignacion de xml toolbar a variable toolbar
-        Toolbar myToolbar = findViewById(R.id.mytoolbar);
+        Toolbar myToolbar = findViewById(R.id.activity_login_tblogin);
         setSupportActionBar(myToolbar);
                                                             //Asignacion de xml button a variable button
         btLogingButton = findViewById(R.id.activity_loging_view_btLogingButton);
@@ -99,10 +100,10 @@ public class LoginActivity extends AppCompatActivity implements TextWatcher, Vie
 
     @Override
     public void onClick(View view) {
-        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-        startActivity(intent);
         if((Button)view == btLogingButton){
-            Toast.makeText(this,"Se ha iniciado sesión!!",Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            Toast.makeText(this,"Se ha iniciado sesión Tio!!",Toast.LENGTH_SHORT).show();
         }
     }
 

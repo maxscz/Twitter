@@ -14,7 +14,8 @@
     <string name="usuario_like">"@gato321"</string>
     <string name="fecha">27/08/2018</string>
     <string name="hora">3:43 p.m.</string>
-
+    <string name="comentario">"Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </string>
     <string name="strInitialHeader">Iniciar sesión en Twitter.</string>
     <string name="strUserHeader">Usuario</string>
     <string name="strPasswordHeader">Contraseña</string>

@@ -11,23 +11,37 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".Activities.LikesActivity"
-            android:label="@string/likes"></activity>
+            android:label="@string/likes">
+
+        </activity>
+
         <activity
             android:name=".Activities.MainActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".Activities.LoginActivity">
+        <activity android:name=".Activities.NewTweetActivity">
+
+        </activity>
+
+        <activity
+            android:name=".Activities.RegisterActivity" >
+        </activity>
+
+        <activity
+            android:name=".Activities.CommentsActivity">
+        </activity>
+
+        <activity android:name=".Activities.LoginActivity"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
-        <activity android:name=".Activities.RegisterActivity" />
-        <activity
-            android:name=".Activities.NewTweetActivity"
-            android:windowSoftInputMode="adjustResize"></activity>
         <activity android:name=".Activities.GalleryActivity"></activity>
     </application>
 

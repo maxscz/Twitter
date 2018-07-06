@@ -1,10 +1,13 @@
 package com.example.cesarsantacruz.tw.Activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.cesarsantacruz.tw.R;
@@ -20,14 +23,19 @@ public class MainActivity extends AppCompatActivity {
     RecyclerViewAdapter recyclerViewAdapter;
     Context context;
     TextView likesView;
+    ListView mDrawerList;
+    private ArrayAdapter<String> mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         //                                                  //Ubicamos el recycler view en nuestro archivo XML
         mRecyclerView = findViewById(R.id.activity_main_rvmain);
+        /*mDrawerList = findViewById(R.id.activity_main_smmain);
+        addMenu();*/
 
         //                                                  //Llenamos de informacion nuestro RecyclerView
         GetData();

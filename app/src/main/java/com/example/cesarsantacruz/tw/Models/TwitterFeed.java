@@ -1,7 +1,4 @@
 package com.example.cesarsantacruz.tw.Models;
-
-import android.widget.ArrayAdapter;
-
 import java.util.ArrayList;
 
 public class TwitterFeed {
@@ -15,9 +12,10 @@ public class TwitterFeed {
     String fecha;
     String hora;
     private ArrayList<String> urlPictures;
+    String comentario;
 
-    public TwitterFeed(String tweet, String name, String user, int picture, int profilePicture, int likes, int comments,
-                       ArrayList urlPictures) {
+    //                                                      //Constructor para la estructura de los tweets
+    public TwitterFeed(String tweet, String name, String user, int picture, int profilePicture, int likes, int comments) {
         this.tweet = tweet;
         this.name = name;
         this.user = user;
@@ -29,6 +27,7 @@ public class TwitterFeed {
     }
 
     public TwitterFeed(int profilePicture, String name, String user, String fecha, ArrayList urlPictures) {
+    //                                                      //Constructor sobrecargado para los likes
         this.profilePicture = profilePicture;
         this.name = name;
         this.user = user;
@@ -115,5 +114,13 @@ public class TwitterFeed {
 
     public void setUrlPictures(ArrayList<String> urlPictures) {
         this.urlPictures = urlPictures;
+    }
+
+    public String getComentario() {
+        return comentario;
+    }
+
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
     }
 }
