@@ -14,6 +14,7 @@
         import android.widget.RelativeLayout;
         import android.widget.TextView;
 
+        import com.example.cesarsantacruz.tw.Activities.CommentsActivity;
         import com.example.cesarsantacruz.tw.Activities.GalleryActivity;
         import com.example.cesarsantacruz.tw.Activities.LikesActivity;
         import com.example.cesarsantacruz.tw.R;
@@ -69,6 +70,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, LikesActivity.class);
+                context.startActivity(intent);
+            }
+        });
+        holder.imageComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, CommentsActivity.class);
                 context.startActivity(intent);
             }
         });
