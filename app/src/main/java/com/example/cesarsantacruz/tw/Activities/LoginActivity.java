@@ -1,5 +1,6 @@
-package com.example.cesarsantacruz.tw;
+package com.example.cesarsantacruz.tw.Activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -13,8 +14,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.cesarsantacruz.tw.R;
+
 //======================================================================================================================
-public class LoginView extends AppCompatActivity implements TextWatcher, View.OnClickListener {
+public class LoginActivity extends AppCompatActivity implements TextWatcher, View.OnClickListener {
     Toolbar toolbar;
     Button btLogingButton;
     EditText etUserLoging;
@@ -96,8 +99,10 @@ public class LoginView extends AppCompatActivity implements TextWatcher, View.On
 
     @Override
     public void onClick(View view) {
+        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+        startActivity(intent);
         if((Button)view == btLogingButton){
-            Toast.makeText(this,"Se ha iniciado sesión Tio!!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Se ha iniciado sesión!!",Toast.LENGTH_SHORT).show();
         }
     }
 

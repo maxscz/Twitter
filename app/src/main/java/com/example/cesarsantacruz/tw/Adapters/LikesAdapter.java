@@ -1,4 +1,4 @@
-package com.example.cesarsantacruz.tw;
+package com.example.cesarsantacruz.tw.Adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -8,6 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.cesarsantacruz.tw.R;
+import com.example.cesarsantacruz.tw.Models.TwitterFeed;
 
 import java.util.ArrayList;
 

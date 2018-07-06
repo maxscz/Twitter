@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.cesarsantacruz.tw">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/towa"
@@ -9,28 +11,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
-            android:name=".LikesActivity"
-            android:label="@string/likes">
-
-        </activity>
-
-        <activity android:name=".MainActivity"
+            android:name=".Activities.LikesActivity"
+            android:label="@string/likes"></activity>
+        <activity
+            android:name=".Activities.MainActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".LoginView">
-
-        </activity>
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".activity_NewTweet"
-            android:windowSoftInputMode="adjustResize">
+        <activity android:name=".Activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
+        <activity android:name=".Activities.RegisterActivity" />
+        <activity
+            android:name=".Activities.NewTweetActivity"
+            android:windowSoftInputMode="adjustResize"></activity>
+        <activity android:name=".Activities.GalleryActivity"></activity>
     </application>
 
 </manifest>

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:orientation="vertical"
-    tools:context=".activity_NewTweet"
+    tools:context=".Activities.NewTweetActivity"
     android:layout_gravity="center">
 
     <android.support.v7.widget.Toolbar
@@ -37,7 +37,7 @@
         android:layout_gravity="start"
         android:backgroundTint="@android:color/white"
         android:layout_below="@id/activity_new_tweet_toolbar_toolbar"/>
-        
+
         <ProgressBar
             android:id="@+id/activity__new_tweet_pbarCharCounter"
             android:indeterminate="false"
