@@ -1,4 +1,4 @@
-package com.example.cesarsantacruz.tw;
+package com.example.cesarsantacruz.tw.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,7 +12,9 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-public class activity_NewTweet extends AppCompatActivity {
+import com.example.cesarsantacruz.tw.R;
+
+public class NewTweetActivity extends AppCompatActivity {
     Button btnNewTweet;
     ProgressBar pbarCharCounter;
 //----------------------------------------------------------------------------------------------------------------------

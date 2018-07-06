@@ -1,7 +1,9 @@
-package com.example.cesarsantacruz.tw;
+package com.example.cesarsantacruz.tw.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.cesarsantacruz.tw.R;
 
 public class RegisterActivity extends AppCompatActivity {
 

@@ -11,18 +11,26 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".LikesActivity"
+            android:name=".Activities.LikesActivity"
             android:label="@string/likes">
 
         </activity>
 
-        <activity android:name=".MainActivity"
+        <activity android:name=".Activities.MainActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name=".LoginView">
+        <activity android:name=".Activities.NewTweetActivity">
 
         </activity>
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".activity_NewTweet"
+
+        <activity
+            android:name=".Activities.RegisterActivity" >
+        </activity>
+
+        <activity
+            android:name=".Activities.CommentsActivity">
+        </activity>
+
+        <activity android:name=".Activities.LoginActivity"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,6 +39,7 @@
             </intent-filter>
 
         </activity>
+
     </application>
 
 </manifest>

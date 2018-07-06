@@ -1,11 +1,13 @@
-package com.example.cesarsantacruz.tw;
+package com.example.cesarsantacruz.tw.Activities;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.cesarsantacruz.tw.Adapters.LikesAdapter;
+import com.example.cesarsantacruz.tw.R;
+import com.example.cesarsantacruz.tw.Models.TwitterFeed;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -27,9 +29,9 @@ public class LikesActivity extends MainActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.likes_view);
+        setContentView(R.layout.activity_likes);
 
-        mRecyclerView = findViewById(R.id.recycler_likes);
+        mRecyclerView = findViewById(R.id.activity_likes_rvlikes);
 
         getLikes();
 
@@ -48,6 +50,7 @@ public class LikesActivity extends MainActivity {
 
         arrstrLikes = new ArrayList<>();
         TwitterFeed twitterLikes = new TwitterFeed(R.drawable.gato, "GatoChido", "@gatuno123", fecha);
+        arrstrLikes.add(twitterLikes);
 
     }
 }

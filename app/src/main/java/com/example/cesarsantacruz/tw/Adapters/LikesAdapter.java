@@ -1,4 +1,4 @@
-package com.example.cesarsantacruz.tw;
+package com.example.cesarsantacruz.tw.Adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -9,12 +9,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.cesarsantacruz.tw.R;
+import com.example.cesarsantacruz.tw.Models.TwitterFeed;
+
 import java.util.ArrayList;
 
 public class LikesAdapter extends RecyclerView.Adapter<LikesAdapter.ViewHolder> {
     private ArrayList<TwitterFeed> arrstrLikes;
     private Context context;
-    private RecyclerView mRecyclerView;
 
     public LikesAdapter(Context context, ArrayList<TwitterFeed> arrstrLikes) {
         this.context = context;
@@ -32,7 +34,6 @@ public class LikesAdapter extends RecyclerView.Adapter<LikesAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final ViewHolder holder2 = holder;
-
 
     }
 

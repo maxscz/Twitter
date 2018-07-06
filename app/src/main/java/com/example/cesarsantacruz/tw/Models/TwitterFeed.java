@@ -1,4 +1,4 @@
-package com.example.cesarsantacruz.tw;
+package com.example.cesarsantacruz.tw.Models;
 
 public class TwitterFeed {
     String tweet;
@@ -10,7 +10,9 @@ public class TwitterFeed {
     int comments;
     String fecha;
     String hora;
+    String comentario;
 
+    //                                                      //Constructor para la estructura de los tweets
     public TwitterFeed(String tweet, String name, String user, int picture, int profilePicture, int likes, int comments) {
         this.tweet = tweet;
         this.name = name;
@@ -21,11 +23,21 @@ public class TwitterFeed {
         this.comments = comments;
     }
 
+    //                                                      //Constructor sobrecargado para los likes
     public TwitterFeed(int profilePicture, String name, String user, String fecha) {
         this.profilePicture = profilePicture;
         this.name = name;
         this.user = user;
         this.fecha = fecha;
+    }
+
+    //                                                      //Constructor sobrecargado para los comentarios
+    public TwitterFeed(int profilePicture, String name, String user,  String fecha, String comentario) {
+        this.name = name;
+        this.user = user;
+        this.profilePicture = profilePicture;
+        this.fecha = fecha;
+        this.comentario = comentario;
     }
 
     public String getTweet() {
@@ -98,5 +110,13 @@ public class TwitterFeed {
 
     public void setHora(String hora) {
         this.hora = hora;
+    }
+
+    public String getComentario() {
+        return comentario;
+    }
+
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
     }
 }

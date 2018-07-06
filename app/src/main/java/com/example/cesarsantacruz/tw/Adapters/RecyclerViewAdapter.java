@@ -1,9 +1,7 @@
-package com.example.cesarsantacruz.tw;
+package com.example.cesarsantacruz.tw.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
-import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,16 +11,19 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.cesarsantacruz.tw.Activities.CommentsActivity;
+import com.example.cesarsantacruz.tw.Activities.LikesActivity;
+import com.example.cesarsantacruz.tw.R;
+import com.example.cesarsantacruz.tw.Models.TwitterFeed;
+
 import java.util.ArrayList;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
 
-    private RecyclerView mRecyclerView;
     Context context;
     private ArrayList<TwitterFeed> arrstrTweets;
     boolean isFavorite = false;
     int intLikes;
-
 
     public RecyclerViewAdapter(Context context, ArrayList<TwitterFeed> arrstrTweets) {
         this.context = context;
@@ -65,6 +66,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             }
         });
 
+        holder.commentsView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent2 = new Intent(context, CommentsActivity.class);
+                context.startActivity(intent2);
+            }
+        });
+
         //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         holder.imageFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,11 +84,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                         isFavorite
                         ) {
                     holder.imageFavorite.setImageResource(R.drawable.ic_favorite_clicked);
-
                     intLikes = intLikes + 1;
 
                 } else {
                     holder.imageFavorite.setImageResource(R.drawable.ic_favorite);
+                    intLikes = intLikes - 1;
                 }
             }
         });
@@ -101,6 +110,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         TextView tweet;
         TextView likes;
         TextView likesView;
+        TextView commentsView;
         RelativeLayout parentLayout;
 
         //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -111,10 +121,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             imageComment = itemView.findViewById(R.id.comentario);
             imageFavoriteClicked = itemView.findViewById(R.id.favorite);
             imageTweet = itemView.findViewById(R.id.foto_view);
-            likesView =itemView. findViewById(R.id.seccion_likes);
+            likesView = itemView. findViewById(R.id.seccion_likes);
+            commentsView = itemView.findViewById(R.id.seccion_comentarios);
 
             tweet = itemView.findViewById(R.id.tweet_view);
-            parentLayout = itemView.findViewById(R.id.parent_layout);
+            parentLayout = itemView.findViewById(R.id.activity_main_smmain);
             likes = itemView.findViewById(R.id.likes);
 
         }
