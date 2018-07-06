@@ -1,4 +1,5 @@
 package com.example.cesarsantacruz.tw.Models;
+import java.util.ArrayList;
 
 public class TwitterFeed {
     String tweet;
@@ -10,10 +11,12 @@ public class TwitterFeed {
     int comments;
     String fecha;
     String hora;
+    private ArrayList<String> urlPictures;
     String comentario;
 
     //                                                      //Constructor para la estructura de los tweets
-    public TwitterFeed(String tweet, String name, String user, int picture, int profilePicture, int likes, int comments) {
+    public TwitterFeed(String tweet, String name, String user, int picture, int profilePicture, int likes, int comments,
+                       ArrayList<String> urlPictures) {
         this.tweet = tweet;
         this.name = name;
         this.user = user;
@@ -21,23 +24,17 @@ public class TwitterFeed {
         this.profilePicture = profilePicture;
         this.likes = likes;
         this.comments = comments;
+        this.urlPictures = urlPictures;
     }
 
+    public TwitterFeed(int profilePicture, String name, String user, String fecha,String comentario, ArrayList urlPictures) {
     //                                                      //Constructor sobrecargado para los likes
-    public TwitterFeed(int profilePicture, String name, String user, String fecha) {
         this.profilePicture = profilePicture;
         this.name = name;
         this.user = user;
         this.fecha = fecha;
-    }
-
-    //                                                      //Constructor sobrecargado para los comentarios
-    public TwitterFeed(int profilePicture, String name, String user,  String fecha, String comentario) {
-        this.name = name;
-        this.user = user;
-        this.profilePicture = profilePicture;
-        this.fecha = fecha;
-        this.comentario = comentario;
+        this.urlPictures = urlPictures;
+        this.comentario=comentario;
     }
 
     public String getTweet() {
@@ -110,6 +107,15 @@ public class TwitterFeed {
 
     public void setHora(String hora) {
         this.hora = hora;
+    }
+
+
+    public ArrayList<String> getUrlPictures() {
+        return urlPictures;
+    }
+
+    public void setUrlPictures(ArrayList<String> urlPictures) {
+        this.urlPictures = urlPictures;
     }
 
     public String getComentario() {

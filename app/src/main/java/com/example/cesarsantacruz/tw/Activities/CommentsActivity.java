@@ -9,8 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.cesarsantacruz.tw.Adapters.CommentsAdapter;
-import com.example.cesarsantacruz.tw.R;
 import com.example.cesarsantacruz.tw.Models.TwitterFeed;
+import com.example.cesarsantacruz.tw.R;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -55,11 +55,11 @@ public class CommentsActivity extends MainActivity {
 
         arrstrComments = new ArrayList<>();
         TwitterFeed twitterComments = new TwitterFeed(R.drawable.gato, "GatoChido", "@gato123",
-                textDate, "You suck dawg");
+                textDate, "You suck dawg",new ArrayList());
         arrstrComments.add(twitterComments);
 
         twitterComments = new TwitterFeed(R.drawable.perro, "PerroPerruno", "@perroCOOL",
-                textDate, "Soy el mejor perro de todos, me amo :D");
+                textDate, "Soy el mejor perro de todos, me amo :D",new ArrayList());
         arrstrComments.add(twitterComments);
 
     }
@@ -74,7 +74,7 @@ public class CommentsActivity extends MainActivity {
             public void onClick(View v) {
                 String comment = mEditComment.getText().toString();
                 //textComment.setText(comment);
-                TwitterFeed twitterComment = new TwitterFeed(R.drawable.perro, "Gato", "@holaGato", textDate, comment);
+                TwitterFeed twitterComment = new TwitterFeed(R.drawable.perro, "Gato", "@holaGato", textDate, comment,new ArrayList());
                 arrstrComments.add(twitterComment);
                 commentsAdapter.notifyItemInserted(arrstrComments.size() -1);
             }

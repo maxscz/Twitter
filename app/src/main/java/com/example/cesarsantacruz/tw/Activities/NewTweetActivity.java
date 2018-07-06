@@ -10,7 +10,6 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.example.cesarsantacruz.tw.R;
 
@@ -24,7 +23,7 @@ public class NewTweetActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-        setContentView(R.layout.activity__new_tweet);
+        setContentView(R.layout.activity_new_tweet);
 
         btnNewTweet = findViewById(R.id.activity_new_tweet_toolbar_btnNewTweet);
         EditText etNewTweet = findViewById(R.id.activity_new_tweet_etNewTweet);
