@@ -32,10 +32,8 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-
-
-
         </android.support.v7.widget.Toolbar>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -48,7 +46,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
             android:text="@string/strUserHeader" />
 
@@ -57,12 +55,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp" />
+            android:layout_marginRight="16dp"
+            android:hint="@string/userCap"
+            android:textSize="12sp"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="24dp"
             android:text="@string/strPasswordHeader" />
 
@@ -73,24 +73,34 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:inputType="textPassword"
-            />
+            android:hint="@string/passwordCap"
+            android:textSize="12sp" />
 
         <Button
-
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="28dp"
             android:layout_gravity="center"
+            android:layout_marginTop="16dp"
             android:background="#FFFFFF"
+            android:gravity="center_horizontal"
             android:text="@string/strForgotYourPassword"
             android:textAllCaps="false"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-            android:gravity="center_horizontal"
-            android:layout_marginTop="16dp"/>
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small" />
+
+        <CheckBox
+            android:id="@+id/activity_login_cbRemember"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/remember"
+            android:layout_marginStart="180dp"
+            android:layout_marginTop="20sp"
+            android:onClick="rememberMe"
+            />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="10dp"
         android:layout_weight="1"
         android:gravity="right"
         android:orientation="horizontal">

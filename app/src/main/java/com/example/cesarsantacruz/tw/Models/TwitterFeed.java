@@ -1,6 +1,6 @@
 package com.example.cesarsantacruz.tw.Models;
 import java.util.ArrayList;
-
+/*POJO*/
 public class TwitterFeed {
     String tweet;
     String name;
@@ -27,14 +27,17 @@ public class TwitterFeed {
         this.urlPictures = urlPictures;
     }
 
+    //                                                      //Constructor sobrecargad para la estructura de los comments
     public TwitterFeed(int profilePicture, String name, String user, String fecha,String comentario, ArrayList urlPictures) {
-    //                                                      //Constructor sobrecargado para los likes
         this.profilePicture = profilePicture;
         this.name = name;
         this.user = user;
         this.fecha = fecha;
         this.urlPictures = urlPictures;
         this.comentario=comentario;
+    }
+
+    public TwitterFeed() {
     }
 
     public String getTweet() {
@@ -108,7 +111,6 @@ public class TwitterFeed {
     public void setHora(String hora) {
         this.hora = hora;
     }
-
 
     public ArrayList<String> getUrlPictures() {
         return urlPictures;

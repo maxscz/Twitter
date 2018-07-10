@@ -73,7 +73,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 context.startActivity(intent);
             }
         });
-        holder.imageComment.setOnClickListener(new View.OnClickListener() {
+        holder.relativeLayoutComments.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, CommentsActivity.class);
@@ -194,8 +194,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         }
         /*END CASE*/
-        ;
-
     }
     //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     @Override
@@ -213,16 +211,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         TextView tweet;
         TextView likes;
         TextView likesView;
-        RelativeLayout parentLayout;
+        TextView tvForCountImages;
+
         ImageView image1;
         ImageView image2;
         ImageView image3;
         ImageView image4;
-        TextView tvForCountImages;
+
+        public RelativeLayout parentLayout;
         RelativeLayout rl;
+        RelativeLayout relativeLayoutComments;
         LinearLayout linearLayout;
 
-
+        RecyclerViewAdapter mAdapter;
 
         //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
         public ViewHolder(final View itemView, RecyclerViewAdapter adapter) {
@@ -235,23 +236,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             likesView =itemView. findViewById(R.id.seccion_likes);
 
             tweet = itemView.findViewById(R.id.tweet_view);
-            parentLayout = itemView.findViewById(R.id.parent_layout);
+            parentLayout = itemView.findViewById(R.id.activity_main_dlMain);
             likes = itemView.findViewById(R.id.likes);
 
             image1 = itemView.findViewById(R.id.row_view_image1);
             image2 = itemView.findViewById(R.id.row_view_image2);
             image3 = itemView.findViewById(R.id.row_view_image3);
             image4 = itemView.findViewById(R.id.row_view_image4);
+
             tvForCountImages = itemView.findViewById(R.id.row_view_tvForCountImages);
             rl = itemView.findViewById(R.id.rl);
             linearLayout = itemView.findViewById(R.id.linear_view);
-
+            relativeLayoutComments = itemView.findViewById(R.id.row_view_rlViewComments);
 
         }
-//----------------------------------------------------------------------------------------------------------------------
-
-
     }
-
-
 }
