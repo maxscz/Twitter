@@ -48,7 +48,7 @@ public class CommentsActivity extends MainActivity {
         mRecyclerView.setLayoutManager(manager);
     }
 
-    private void getComments() {
+    public void getComments() {
         calendar = Calendar.getInstance();
         dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
         textDate = dateFormat.format(calendar.getTime());

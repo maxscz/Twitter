@@ -1,11 +1,16 @@
 package com.example.cesarsantacruz.tw.Activities;
 
+import android.app.DialogFragment;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -17,9 +22,10 @@ import com.example.cesarsantacruz.tw.Models.TwitterFeed;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-
+    int comments;
+    FloatingActionButton fabNewTweet;
     RecyclerView mRecyclerView;
-    ArrayList<TwitterFeed> arrstrTweets;
+    ArrayList<TwitterFeed> arrstrTweets = new ArrayList<>();
     RecyclerViewAdapter recyclerViewAdapter;
     Context context;
     TextView likesView;
@@ -30,7 +36,24 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        fabNewTweet = findViewById(R.id.activity_main_fabNewTweet);
 
+        fabNewTweet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                Fragment prev = getFragmentManager().findFragmentByTag("dialog");
+                if(prev != null) {
+                    ft.remove(prev);
+
+                }
+                ft.addToBackStack(null);
+
+                DialogFragment dialogFragment = new NewTweetFragmentDialog();
+                dialogFragment.setStyle(DialogFragment.STYLE_NORMAL,R.style.DialogFragmentTheme);
+                dialogFragment.show(ft, "dialog");
+            }
+        });
 
         //                                                  //Ubicamos el recycler view en nuestro archivo XML
         mRecyclerView = findViewById(R.id.activity_main_rvmain);
@@ -38,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         addMenu();*/
 
         //                                                  //Llenamos de informacion nuestro RecyclerView
-        GetData();
+      //  GetData();
         //                                                  //Configuración del adaptador para el RecyclerView
         recyclerViewAdapter = new RecyclerViewAdapter(this, arrstrTweets);
         mRecyclerView.setAdapter(recyclerViewAdapter);
@@ -48,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(manager);
 
     }
+
+
 
     public void GetData () {
         arrstrTweets = new ArrayList<>();
@@ -59,7 +84,16 @@ public class MainActivity extends AppCompatActivity {
        arrUrl.add("https://1.bp.blogspot.com/-z3iEVshe8Lc/T3oLv1ZqfLI/AAAAAAAADZw/Yr1oj08kZ3M/s1600/hacer.jpg");
        arrUrl.add("http://www.multimedios.com/files/article_main/uploads/2017/03/14/58c82f951b5c4.jpeg");
 
-        TwitterFeed twitterFeed = new TwitterFeed("probando probando probando", "perro chido",
+       TwitterFeed modelTweet = new TwitterFeed();
+
+
+       for (int intI = 0; intI<20; intI = intI + 1){
+           TwitterFeed twitterFeed = new TwitterFeed("probando probando probando", "perro chido",
+                   "@perro"+intI, R.drawable.perro, R.drawable.perro, intI+10, modelTweet.getComments(),arrUrl);
+           arrstrTweets.add(twitterFeed);
+       }
+
+        /*TwitterFeed twitterFeed = new TwitterFeed("probando probando probando", "perro chido",
                 "@perro123", R.drawable.perro, R.drawable.perro, 4, 6,arrUrl);
         arrstrTweets.add(twitterFeed);
 
@@ -78,5 +112,11 @@ public class MainActivity extends AppCompatActivity {
         twitterFeed = new TwitterFeed("probando probando probando", "perro chido",
                 "@perro123", 0, R.drawable.perro, 4, 1,arrUrl);
         arrstrTweets.add(twitterFeed);
+        */
+    }
+    public void createNewTweet(TwitterFeed newTweet)
+    {
+        arrstrTweets.add(newTweet);
+        recyclerViewAdapter.notifyDataSetChanged();
     }
 }

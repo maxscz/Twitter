@@ -41,6 +41,7 @@ public class LikesActivity extends MainActivity {
         LinearLayoutManager manager = new LinearLayoutManager(getApplicationContext(),
                 LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(manager);
+
     }
 
     public void getLikes() {

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="5dp"
-
+    android:id="@+id/row_view_ll_detail_activity"
     >
 
     <android.support.v7.widget.CardView
@@ -21,7 +21,7 @@
             android:orientation="horizontal">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/picture_user"
+                android:id="@+id/row_view_iv_picture_user"
                 android:layout_width="50dp"
                 android:layout_height="70dp"
                 android:contentDescription="@string/profile"
@@ -31,7 +31,7 @@
 
 
                 <TextView
-                    android:id="@+id/name_user"
+                    android:id="@+id/row_view_tv_name_user"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingStart="4dp"
@@ -39,10 +39,10 @@
                     android:text="@string/profile"
                     android:textStyle="bold"
                     android:textSize="15sp"
-                    android:layout_toRightOf="@id/picture_user"/>
+                    android:layout_toRightOf="@id/row_view_iv_picture_user"/>
 
                 <TextView
-                    android:id="@+id/user_user"
+                    android:id="@+id/row_view_tv_username"
                     android:layout_width="187dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="2dp"
@@ -50,14 +50,14 @@
                     android:text="@string/usuario"
                     android:textSize="10sp"
                     android:textStyle="italic"
-                    android:layout_below="@id/name_user"
-                    android:layout_toRightOf="@id/picture_user"/>
+                    android:layout_below="@id/row_view_tv_name_user"
+                    android:layout_toRightOf="@id/row_view_iv_picture_user"/>
 
 
 
 
         <TextView
-            android:id="@+id/tweet_view"
+            android:id="@+id/row_view_tv_tweet_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -65,30 +65,33 @@
             android:text="@string/tweet"
             android:textSize="12sp"
             android:background="@android:color/white"
-            android:layout_below="@id/user_user"
-            android:layout_toRightOf="@id/picture_user"/>
+            android:layout_below="@id/row_view_tv_username"
+            android:layout_toRightOf="@id/row_view_iv_picture_user"/>
 
         <LinearLayout
-            android:id="@+id/linear_view"
+            android:id="@+id/row_view_linear_layout_imageview"
             android:layout_width="match_parent"
-            android:layout_toRightOf="@id/picture_user"
+            android:layout_toRightOf="@id/row_view_iv_picture_user"
+            android:layout_marginRight="16dp"
             android:orientation="vertical"
             android:layout_marginBottom="5dp"
-            android:layout_below="@id/tweet_view"
+                    android:layout_below="@id/row_view_tv_tweet_view"
             android:layout_height="150dp">
             <LinearLayout
+                android:id="@+id/row_view_linear_layout_image_up"
                 android:layout_weight="1"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <ImageView
-                    android:id="@+id/row_view_image1"
+                    android:id="@+id/row_view_iv_image1"
                     android:scaleType="fitXY"
                     android:layout_weight="1"
                     android:src="@drawable/perro"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
                 <ImageView
+                    android:visibility="gone"
                     android:id="@+id/row_view_image2"
                     android:scaleType="fitXY"
                     android:layout_weight="1"
@@ -97,12 +100,13 @@
                     android:layout_height="wrap_content" />
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/row_view_linear_layout_down"
                 android:layout_weight="1"
-
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <ImageView
+                    android:visibility="gone"
                     android:id="@+id/row_view_image3"
                     android:layout_weight="1"
                     android:scaleType="fitXY"
@@ -110,6 +114,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
                 <RelativeLayout
+                    android:visibility="gone"
                     android:id="@+id/rl"
                     android:layout_weight="1"
                     android:layout_width="match_parent"
@@ -140,66 +145,66 @@
 
         </LinearLayout>
                 <ImageView
-                    android:id="@+id/comentario"
+                    android:id="@+id/row_view_iv_comentario"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_comment"
-                    android:layout_toRightOf="@id/picture_user"
-                    android:layout_below="@id/linear_view"
+                    android:layout_toRightOf="@id/row_view_iv_picture_user"
+                    android:layout_below="@id/row_view_linear_layout_imageview"
                     android:layout_marginLeft="16dp"/>
 
                 <TextView
-                    android:id="@+id/number_of_coments"
+                    android:id="@+id/row_view_iv_number_of_coments"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="20"
-                    android:layout_below="@id/linear_view"
-                    android:layout_toRightOf="@id/comentario"
+                    android:layout_below="@id/row_view_linear_layout_imageview"
+                    android:layout_toRightOf="@id/row_view_iv_comentario"
                     android:layout_marginLeft="8dp"
                     />
 
                 <TextView
-                    android:id="@+id/seccion_comentarios"
+                    android:id="@+id/row_view_tv_seccion_comentarios"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/comment"
                     android:layout_marginStart="5dp"
-                    android:layout_below="@id/linear_view"
-                    android:layout_toRightOf="@id/number_of_coments"
+                    android:layout_below="@id/row_view_linear_layout_imageview"
+                    android:layout_toRightOf="@id/row_view_iv_number_of_coments"
                     android:layout_marginLeft="8dp"
                     />
 
 
                 <ImageView
-                    android:id="@+id/favorite"
+                    android:id="@+id/row_view_iv_favorite"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_favorite"
                     android:layout_marginLeft="20dp"
-                    android:layout_below="@id/linear_view"
-                    android:layout_toLeftOf="@id/likes"
+                    android:layout_below="@id/row_view_linear_layout_imageview"
+                    android:layout_toLeftOf="@id/row_view_tv_likes"
 
                     />
 
                 <TextView
-                    android:id="@+id/likes"
+                    android:id="@+id/row_view_tv_likes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="18"
+                    android:text=""
                     android:layout_marginRight="8dp"
-                    android:layout_below="@id/linear_view"
-                    android:layout_toLeftOf="@id/seccion_likes"
+                    android:layout_below="@id/row_view_linear_layout_imageview"
+                    android:layout_toLeftOf="@id/row_view_tv_seccion_likes"
                     />
 
                 <TextView
-                    android:id="@+id/seccion_likes"
+                    android:id="@+id/row_view_tv_seccion_likes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/likes"
                     android:layout_marginRight="16dp"
 
-                    android:layout_alignParentRight="true"
-                    android:layout_below="@id/linear_view"
+                        android:layout_alignParentRight="true"
+                    android:layout_below="@id/row_view_linear_layout_imageview"
                     />
 
         </RelativeLayout>

@@ -1,4 +1,6 @@
 package com.example.cesarsantacruz.tw.Models;
+import android.widget.TextView;
+
 import java.util.ArrayList;
 
 public class TwitterFeed {
@@ -36,6 +38,13 @@ public class TwitterFeed {
         this.urlPictures = urlPictures;
         this.comentario=comentario;
     }
+
+
+    public TwitterFeed(){
+
+    }
+
+
 
     public String getTweet() {
         return tweet;
@@ -83,6 +92,7 @@ public class TwitterFeed {
 
     public void setLikes(int likes) {
         this.likes = likes;
+
     }
 
     public int getComments() {

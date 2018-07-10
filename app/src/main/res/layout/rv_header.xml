@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@android:color/white"
+        android:orientation="horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/rv_header_picture_user"
+            android:layout_width="50dp"
+            android:layout_height="70dp"
+            android:contentDescription="@string/profile"
+            android:scaleType="centerCrop"
+            android:src="@drawable/perro"/>
+
+        <TextView
+            android:id="@+id/rv_header_name_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="4dp"
+            android:paddingTop="14dp"
+            android:text="@string/profile"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:layout_toRightOf="@id/rv_header_picture_user"/>
+
+        <TextView
+            android:id="@+id/rv_header_tvUserName"
+            android:layout_width="187dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:layout_weight="1"
+            android:text="@string/usuario"
+            android:textSize="10sp"
+            android:textStyle="italic"
+            android:layout_below="@id/rv_header_name_user"
+            android:layout_toRightOf="@id/rv_header_picture_user"/>
+
+
+
+
+        <TextView
+            android:id="@+id/rv_header_tweet_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="5dp"
+            android:text="@string/tweet"
+            android:textSize="12sp"
+            android:background="@android:color/white"
+            android:layout_below="@id/rv_header_picture_user"/>
+
+        <LinearLayout
+            android:id="@+id/rv_header_linear_view"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:orientation="vertical"
+            android:layout_marginBottom="5dp"
+            android:layout_below="@id/rv_header_tweet_view"
+            android:layout_height="150dp">
+            <ImageView
+
+                android:id="@+id/rv_header_image1"
+                android:scaleType="fitXY"
+                android:layout_weight="1"
+                android:src="@drawable/perro"
+                android:layout_width="match_parent"
+                android:layout_below="@id/rv_header_tweet_view"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/rv_header_linear_layout_hora_fecha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rv_header_linear_view"
+            android:layout_toRightOf="@id/rv_header_picture_user"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="FECHA DD MES AA /HORA HH:MM ##"
+                android:layout_marginTop="4dp"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rv_header_linear_layout_hora_fecha"
+            android:id="@+id/rv_header_text_likes"
+            android:layout_marginTop="4dp"
+            >
+
+            <TextView
+                android:id="@+id/rv_header_seccion_likes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=" n likes"
+                android:layout_marginRight="16dp"
+                android:gravity="center"
+
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rv_header_text_likes"
+            android:layout_marginTop="4dp"
+            >
+            <ImageView
+                android:id="@+id/rv_header_comentario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_comment"
+                android:layout_toRightOf="@id/rv_footer_picture_user"
+                android:layout_below="@id/rv_header_linear_view"
+                android:layout_marginLeft="16dp"/>
+
+            <ImageView
+                android:id="@+id/rv_header_favorite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_favorite"
+                />
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>
+

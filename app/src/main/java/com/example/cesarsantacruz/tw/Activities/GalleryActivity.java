@@ -19,10 +19,12 @@ public class GalleryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery);
         intentString = getIntent().getExtras().getStringArrayList("image");
+        imageViewPosition = getIntent().getExtras().getInt("position");
         mCustomPagerAdapter = new CustomPagerAdapter(this,intentString);
 
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mCustomPagerAdapter);
+        mViewPager.setCurrentItem(imageViewPosition);
 
     }
 }
