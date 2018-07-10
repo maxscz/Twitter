@@ -2,7 +2,7 @@ package com.example.cesarsantacruz.tw.Models;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-
+/*POJO*/
 public class TwitterFeed {
     String tweet;
     String name;
@@ -30,7 +30,6 @@ public class TwitterFeed {
     }
 
     public TwitterFeed(int profilePicture, String name, String user, String fecha,String comentario, ArrayList urlPictures) {
-    //                                                      //Constructor sobrecargado para los likes
         this.profilePicture = profilePicture;
         this.name = name;
         this.user = user;
@@ -39,12 +38,8 @@ public class TwitterFeed {
         this.comentario=comentario;
     }
 
-
-    public TwitterFeed(){
-
+    public TwitterFeed() {
     }
-
-
 
     public String getTweet() {
         return tweet;
@@ -92,7 +87,6 @@ public class TwitterFeed {
 
     public void setLikes(int likes) {
         this.likes = likes;
-
     }
 
     public int getComments() {
@@ -118,7 +112,6 @@ public class TwitterFeed {
     public void setHora(String hora) {
         this.hora = hora;
     }
-
 
     public ArrayList<String> getUrlPictures() {
         return urlPictures;

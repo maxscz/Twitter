@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:andorid="http://schemas.android.com/tools">
     <item
-        android:id="@+id/option_menu"
+        android:id="@+id/directory_item_signOut"
         android:icon="@drawable/about_us"
-        android:title="@string/about_us"
-        app:showAsAction="always">
+        android:title="@string/sign_out"
+        app:itemIconTint="@color/colorDanger"
+        android:onClick="signOut">
 
     </item>
 

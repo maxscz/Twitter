@@ -6,6 +6,6 @@
         android:id="@+id/add_btn"
         android:icon="@drawable/ic_add_tweet"
         android:title="@string/agregar"
-        app:showAsAction="always" />
+        />
 
 </menu>

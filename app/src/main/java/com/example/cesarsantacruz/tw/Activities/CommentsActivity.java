@@ -24,7 +24,7 @@ public class CommentsActivity extends MainActivity {
     SimpleDateFormat dateFormat;
     String textDate;
 
-    TextView textComment;
+    TextView user;
     CommentsAdapter commentsAdapter;
     EditText mEditComment;
     ImageView mSendComment;
@@ -51,32 +51,35 @@ public class CommentsActivity extends MainActivity {
     public void getComments() {
         calendar = Calendar.getInstance();
         dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-        textDate = dateFormat.format(calendar.getTime());
 
         arrstrComments = new ArrayList<>();
         TwitterFeed twitterComments = new TwitterFeed(R.drawable.gato, "GatoChido", "@gato123",
-                textDate, "You suck dawg",new ArrayList());
+                textDate, "You suck dawg", new ArrayList());
         arrstrComments.add(twitterComments);
 
         twitterComments = new TwitterFeed(R.drawable.perro, "PerroPerruno", "@perroCOOL",
-                textDate, "Soy el mejor perro de todos, me amo :D",new ArrayList());
+                textDate, "Soy el mejor perro de todos, me amo :D", new ArrayList());
         arrstrComments.add(twitterComments);
 
+        textDate = dateFormat.format(calendar.getTime());
     }
 
     private void sendComment () {
         mSendComment = findViewById(R.id.activity_comment_ivbtn);
-        //textComment = findViewById(R.id.comment_comentario);
-
 
         mSendComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String comment = mEditComment.getText().toString();
-                //textComment.setText(comment);
-                TwitterFeed twitterComment = new TwitterFeed(R.drawable.perro, "Gato", "@holaGato", textDate, comment,new ArrayList());
+
+                calendar = Calendar.getInstance();
+                dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+                textDate = dateFormat.format(calendar.getTime());
+
+                TwitterFeed twitterComment = new TwitterFeed(R.drawable.perro, "gatoChido", "@holaGato", textDate, comment, new ArrayList());
                 arrstrComments.add(twitterComment);
                 commentsAdapter.notifyItemInserted(arrstrComments.size() -1);
+                mEditComment.setText("");
             }
         });
     }
