@@ -19,12 +19,18 @@ import android.widget.ProgressBar;
 import com.example.cesarsantacruz.tw.Models.TwitterFeed;
 import com.example.cesarsantacruz.tw.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class NewTweetFragmentDialog extends DialogFragment {
     Button btnNewTweet;
     ProgressBar pbarCharCounter;
     EditText etNewTweet;
+    private SimpleDateFormat simpleDateFormat;
+    private Calendar calendar;
+    private String fecha;
+    private String hora;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +47,16 @@ public class NewTweetFragmentDialog extends DialogFragment {
         btnNewTweet = v.findViewById(R.id.activity_new_tweet_toolbar_btnNewTweet);
         etNewTweet = v.findViewById(R.id.activity_new_tweet_etNewTweet);
         pbarCharCounter = v.findViewById(R.id.activity__new_tweet_pbarCharCounter);
+        Bundle b = getArguments();
+        final String type = b.getString("Type");
+        final int position = b.getInt("Position");
+        if ( type.equalsIgnoreCase("Tweet"))
+        {
+            btnNewTweet.setText("TWITTEAR");
+        }
+        else {
+            btnNewTweet.setText("RESPONDER");
+        }
         //Activar Boton de Crear Tweet
         etNewTweet.addTextChangedListener(new TextWatcher() {
             @Override
@@ -88,13 +104,31 @@ public class NewTweetFragmentDialog extends DialogFragment {
         btnNewTweet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MainActivity activity = (MainActivity) getActivity();
-                ArrayList<String> arrUrl = new ArrayList<>();
-                arrUrl.add("https://www.viajaraitalia.com/wp-content/uploads/2009/09/venecia-de-noche.jpg");
-                TwitterFeed newTweet = new TwitterFeed(etNewTweet.getText().toString(), "perro chido",
-                        "@perro123", R.drawable.perro, R.drawable.perro, 4, 6,arrUrl);
-                activity.createNewTweet(newTweet);
-                dismiss();
+                calendar = Calendar.getInstance();
+                simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+                fecha = simpleDateFormat.format(calendar.getTime());
+                if ( type.equalsIgnoreCase("Tweet"))
+                {
+
+                    MainActivity activity = (MainActivity) getActivity();
+                    ArrayList<String> arrUrl = new ArrayList<>();
+                    arrUrl.add("https://www.viajaraitalia.com/wp-content/uploads/2009/09/venecia-de-noche.jpg");
+                    TwitterFeed newTweet = new TwitterFeed(etNewTweet.getText().toString(), "perro chido",
+                            "@perro123",fecha ,R.drawable.perro, R.drawable.perro, 0, 0,arrUrl);
+                    activity.createNewTweet(newTweet);
+                    dismiss();
+                }
+                else {
+                    MainActivity activity = (MainActivity) getActivity();
+                    ArrayList<String> arrUrl = new ArrayList<>();
+                    arrUrl.add("https://www.viajaraitalia.com/wp-content/uploads/2009/09/venecia-de-noche.jpg");
+                    TwitterFeed newTweet = new TwitterFeed(etNewTweet.getText().toString(), "perro chido",
+                            "@perro123",fecha, R.drawable.perro, R.drawable.perro, 0, 0,arrUrl);
+                    activity.addCommentToTwitter(newTweet,position);
+                    dismiss();
+
+                }
+
             }
         });
 //----------------------------------------------------------------------------------------------------------------------

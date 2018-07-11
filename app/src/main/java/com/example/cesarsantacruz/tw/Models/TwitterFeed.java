@@ -1,9 +1,9 @@
 package com.example.cesarsantacruz.tw.Models;
-import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 /*POJO*/
-public class TwitterFeed {
+public class TwitterFeed implements Serializable {
     String tweet;
     String name;
     String user;
@@ -14,10 +14,14 @@ public class TwitterFeed {
     String fecha;
     String hora;
     private ArrayList<String> urlPictures;
+    private ArrayList<TwitterFeed> tweetsComments;
     String comentario;
+    Boolean isLike;
+    public ArrayList<UserTweet> users;
 
     //                                                      //Constructor para la estructura de los tweets
-    public TwitterFeed(String tweet, String name, String user, int picture, int profilePicture, int likes, int comments,
+
+    public TwitterFeed(String tweet, String name, String user,String fecha, int picture, int profilePicture, int likes, int comments,
                        ArrayList<String> urlPictures) {
         this.tweet = tweet;
         this.name = name;
@@ -27,15 +31,11 @@ public class TwitterFeed {
         this.likes = likes;
         this.comments = comments;
         this.urlPictures = urlPictures;
-    }
+        this.setIsLike(false);
+        this.setFecha(fecha);
+        this.setTweetsComments(new ArrayList<TwitterFeed>());
+        this.users=new ArrayList<>();
 
-    public TwitterFeed(int profilePicture, String name, String user, String fecha,String comentario, ArrayList urlPictures) {
-        this.profilePicture = profilePicture;
-        this.name = name;
-        this.user = user;
-        this.fecha = fecha;
-        this.urlPictures = urlPictures;
-        this.comentario=comentario;
     }
 
     public TwitterFeed() {
@@ -128,4 +128,28 @@ public class TwitterFeed {
     public void setComentario(String comentario) {
         this.comentario = comentario;
     }
+
+    public Boolean getIsLike(){
+        return isLike;
+    }
+    public void setIsLike(Boolean isLike){
+        this.isLike = isLike;
+    }
+
+    public ArrayList<TwitterFeed> getTweetsComments() {
+            return tweetsComments;
+
+    }
+
+
+    public void setTweetsComments(ArrayList<TwitterFeed> tweetsComments) {
+        this.tweetsComments = tweetsComments;
+    }
+
+
+    public void adduser (UserTweet users){
+        this.users.add(users);
+    }
 }
+
+

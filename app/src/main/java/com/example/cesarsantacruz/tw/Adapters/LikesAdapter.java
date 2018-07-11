@@ -34,6 +34,7 @@ public class LikesAdapter extends RecyclerView.Adapter<LikesAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final ViewHolder holder2 = holder;
+        holder.fecha.setText(arrstrLikes.get(position).getFecha());
 
     }
 

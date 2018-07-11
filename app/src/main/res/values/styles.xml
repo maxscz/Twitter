@@ -5,7 +5,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">#00aced</item>
+        <item name="colorAccent">@color/colorAccent</item>
 
     </style>
 
@@ -14,10 +14,10 @@
         <item name="android:progressDrawable">@drawable/progress_determinate_circular_bar</item>
 
     </style>
-    <style name="DialogFragmentTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
+    <style name="DialogFragmentTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@android:color/white</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">#00aced</item>
+        <item name="colorAccent">@color/colorAccent</item>
         <item name="android:paddingRight">0dp</item>
         <item name="android:paddingLeft">0dp</item>
         <item name="android:windowAnimationStyle">@style/MyAnimation.Window</item>
@@ -30,8 +30,12 @@
         <item name="android:windowExitAnimation">@anim/anim_out</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="NavHeader" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:backgroundTint">@color/colorPrimary</item>
+    </style>
 
 </resources>

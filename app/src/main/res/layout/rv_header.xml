@@ -88,9 +88,10 @@
             android:layout_toRightOf="@id/rv_header_picture_user"
             >
             <TextView
+                android:id="@+id/rv_header_fecha"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="FECHA DD MES AA /HORA HH:MM ##"
+                android:text=""
                 android:layout_marginTop="4dp"/>
 
         </LinearLayout>

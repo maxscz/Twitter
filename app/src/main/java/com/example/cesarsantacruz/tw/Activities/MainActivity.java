@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Context context;
     DrawerLayout drawer;
     SwipeRefreshLayout swipeToRefresh;
+    int intLikes = 0;
 
     private static final String TAG = "MainActivity";
 
@@ -58,8 +59,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         fabNewTweet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Bundle b = new Bundle();
+                b.putString("Type", "Tweet");
+                b.putInt("Position",0);
+
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 Fragment prev = getFragmentManager().findFragmentByTag("dialog");
+
                 if(prev != null) {
                     ft.remove(prev);
 
@@ -67,8 +73,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 ft.addToBackStack(null);
 
                 DialogFragment dialogFragment = new NewTweetFragmentDialog();
+                dialogFragment.setArguments(b);
                 dialogFragment.setStyle(DialogFragment.STYLE_NORMAL,R.style.DialogFragmentTheme);
                 dialogFragment.show(ft, "dialog");
+
+
             }
         });
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -87,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mRecyclerView = findViewById(R.id.activity_main_rvmain);
 
         //                                                  //Llenamos de informacion nuestro RecyclerView
-        GetData();
+        //GetData();
         //                                                  //Configuración del adaptador para el RecyclerView
         recyclerViewAdapter = new RecyclerViewAdapter(this, arrstrTweets);
         mRecyclerView.setAdapter(recyclerViewAdapter);
@@ -141,32 +150,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
        arrUrl.add("https://1.bp.blogspot.com/-z3iEVshe8Lc/T3oLv1ZqfLI/AAAAAAAADZw/Yr1oj08kZ3M/s1600/hacer.jpg");
        arrUrl.add("http://www.multimedios.com/files/article_main/uploads/2017/03/14/58c82f951b5c4.jpeg");
 
-        TwitterFeed twitterFeed = new TwitterFeed("probando probando probando", "perro chido",
-                "@perro123", R.drawable.perro, R.drawable.perro, 4, 6,arrUrl);
-        arrstrTweets.add(twitterFeed);
 
-        twitterFeed = new TwitterFeed("probando probando probando", "perro chido",
-                "@perro123", 0, R.drawable.perro, 23, 8, arrUrl);
-        arrstrTweets.add(twitterFeed);
-
-        twitterFeed = new TwitterFeed("probando probando probando", "perro chido",
-                "@perro123", R.drawable.perro, R.drawable.perro, 22, 13, arrUrl);
-        arrstrTweets.add(twitterFeed);
-
-        twitterFeed = new TwitterFeed("probando probando probando", "perro chido",
-                "@perro123", R.drawable.perro, R.drawable.perro, 15, 6, arrUrl);
-        arrstrTweets.add(twitterFeed);
-
-        twitterFeed = new TwitterFeed("probando probando probando", "perro chido",
-                "@perro123", 0, R.drawable.perro, 4, 1,arrUrl);
-        arrstrTweets.add(twitterFeed);
-        */
     }
     public void createNewTweet(TwitterFeed newTweet)
     {
         arrstrTweets.add(newTweet);
         recyclerViewAdapter.notifyDataSetChanged();
     }
+    public void addCommentToTwitter(TwitterFeed newTweet, int position)
+    {
+        arrstrTweets.get(position).getTweetsComments().add(newTweet);
+        recyclerViewAdapter.notifyDataSetChanged();
+    }
+
 
     @Override
     public void onBackPressed() {
@@ -203,7 +199,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 //                                          //Handle the Sign out option
                 id == R.id.nav_sign_out
                 ) {
-            Toast.makeText(this, "Oprimiste la opción de SIGN OUT", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Oprimiste la opción de SIGN OUT", Toast.LENGTH_SHORT).show();
+            logOut();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.activity_main_dlMain);
@@ -220,7 +217,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void signOut(MenuItem item) {
-        this.finish();
+        logOut();
     }
 
     @Override
@@ -230,6 +227,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void onItemMove(int intFromPosition, int intToPosition) {
+
+    }
+
+    private void logOut(){
+        Intent intent = new Intent ( this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+    }
+    public void callToFragmentInbox(int position){
+        Bundle b = new Bundle();
+        b.putString("Type", "Coment");
+        b.putInt("Position",position);
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        Fragment prev = getFragmentManager().findFragmentByTag("dialog");
+        if(prev != null) {
+            ft.remove(prev);
+
+        }
+        ft.addToBackStack(null);
+
+        DialogFragment dialogFragment = new NewTweetFragmentDialog();
+        dialogFragment.setArguments(b);
+        dialogFragment.setStyle(DialogFragment.STYLE_NORMAL,R.style.DialogFragmentTheme);
+        dialogFragment.show(ft, "dialog");
+
 
     }
 }

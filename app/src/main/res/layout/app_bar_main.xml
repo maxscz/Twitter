@@ -22,4 +22,12 @@
 
     <include layout="@layout/content_main" />
 
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_gravity="right|bottom"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_add_tweet"
+        android:id="@+id/activity_main_fabNewTweet"/>
+
 </android.support.design.widget.CoordinatorLayout>

@@ -1,9 +1,11 @@
 package com.example.cesarsantacruz.tw.Activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.example.cesarsantacruz.tw.Adapters.RecyclerViewAdapter;
 import com.example.cesarsantacruz.tw.Adapters.RecyclerViewAdapterDetailActivity;
@@ -18,17 +20,26 @@ public class DetailActivity extends AppCompatActivity {
     ArrayList<TwitterFeed> arrstrTweets = new ArrayList<>();
     int intLikesCount = 0;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-    rvDetailActivity = findViewById(R.id.activity_detail_recycler_view);
+        rvDetailActivity = findViewById(R.id.activity_detail_recycler_view);
         LinearLayoutManager manager = new LinearLayoutManager(getApplicationContext(),
                 LinearLayoutManager.VERTICAL, false);
         rvDetailActivity.setLayoutManager(manager);
-     getData();
+        TwitterFeed tweeter= (TwitterFeed) getIntent().getExtras().getSerializable("Tweet");
+        arrstrTweets=new ArrayList<>();
+        arrstrTweets.add(tweeter);
+        arrstrTweets.addAll(tweeter.getTweetsComments());
         rvDetailActivityAdapter = new RecyclerViewAdapterDetailActivity(this, arrstrTweets);
         rvDetailActivity.setAdapter(rvDetailActivityAdapter);
+
+
+
+
     }
     public void getData () {
 
@@ -44,11 +55,7 @@ public class DetailActivity extends AppCompatActivity {
     TwitterFeed modelTweet = new TwitterFeed();
 
 
-       for (int intI = 0; intI<20; intI = intI + 1){
-        TwitterFeed twitterFeed = new TwitterFeed("probando probando probando", "perro chido",
-                "@perro"+intI, R.drawable.perro, R.drawable.perro, intLikesCount, modelTweet.getComments(),arrUrl);
-        arrstrTweets.add(twitterFeed);
-    }
+
 
 }
     public void createNewTweet()

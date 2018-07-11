@@ -24,16 +24,16 @@ public class LikesActivity extends MainActivity {
     private String fecha;
     private String hora;
     LikesAdapter likesAdapter;
-
+    private int pos;
     //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_likes);
-
+            pos = getIntent().getExtras().getInt("position");
         mRecyclerView = findViewById(R.id.activity_likes_rvlikes);
 
-        getLikes();
+
 
         likesAdapter = new LikesAdapter(this, arrstrLikes);
         mRecyclerView.setAdapter(likesAdapter);
@@ -41,6 +41,11 @@ public class LikesActivity extends MainActivity {
         LinearLayoutManager manager = new LinearLayoutManager(getApplicationContext(),
                 LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(manager);
+        TwitterFeed tweeter= (TwitterFeed) getIntent().getExtras().getSerializable("Tweet");
+        arrstrTweets=new ArrayList<>();
+        arrstrTweets.add(tweeter);
+        tweeter.getLikes();
+        //getLikes();
 
     }
 
@@ -49,9 +54,6 @@ public class LikesActivity extends MainActivity {
         simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
         fecha = simpleDateFormat.format(calendar.getTime());
 
-        arrstrLikes = new ArrayList<>();
-        TwitterFeed twitterLikes = new TwitterFeed(R.drawable.gato, "GatoChido", "@gatuno123", fecha, "",new ArrayList());
-        arrstrLikes.add(twitterLikes);
 
     }
 }

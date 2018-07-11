@@ -122,6 +122,7 @@ public class LoginActivity extends AppCompatActivity implements TextWatcher, Vie
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             Toast.makeText(this,"Sign in succesful!",Toast.LENGTH_SHORT).show();
+            finish();
         }
     }
 }

@@ -1,6 +1,9 @@
 
         package com.example.cesarsantacruz.tw.Adapters;
 
+        import android.app.Activity;
+        import android.app.DialogFragment;
+        import android.app.FragmentTransaction;
         import android.content.Context;
         import android.content.Intent;
         import android.os.Bundle;
@@ -18,6 +21,8 @@
         import com.example.cesarsantacruz.tw.Activities.DetailActivity;
         import com.example.cesarsantacruz.tw.Activities.GalleryActivity;
         import com.example.cesarsantacruz.tw.Activities.LikesActivity;
+        import com.example.cesarsantacruz.tw.Activities.MainActivity;
+        import com.example.cesarsantacruz.tw.Activities.NewTweetFragmentDialog;
         import com.example.cesarsantacruz.tw.R;
         import com.example.cesarsantacruz.tw.Models.TwitterFeed;
         import com.squareup.picasso.Picasso;
@@ -29,8 +34,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private RecyclerView mRecyclerView;
     Context context;
     private ArrayList<TwitterFeed> arrstrTweets;
-    boolean isFavorite = false;
-    int intLikes = 0;
+
+
 
 
 
@@ -59,6 +64,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder2, final int position) {
         final ViewHolder holder = (ViewHolder)holder2;
 
+
+
         if (
                 arrstrTweets.get(position).getPicture() == 0
                 ) {
@@ -70,6 +77,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, DetailActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("Tweet",arrstrTweets.get(position));
+                intent.putExtras(bundle);
+
                 context.startActivity(intent);
             }
         });
@@ -81,12 +92,28 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 context.startActivity(intent);
             }
         });
-        holder.relativeLayoutComments.setOnClickListener(new View.OnClickListener() {
+
+        holder.imageComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, CommentsActivity.class);
-                context.startActivity(intent);
-            }
+                ((MainActivity) context).callToFragmentInbox(position);
+
+                }
+
+           /* setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    FragmentTransaction ft = getFragmentManager().beginTransaction();
+                    Fragment prev = getFragmentManager().findFragmentByTag("dialog");
+                    if(prev != null) {
+                        ft.remove(prev);
+
+                    }
+                    ft.addToBackStack(null);
+
+                    DialogFragment dialogFragment = new NewTweetFragmentDialog();
+                    dialogFragment.setStyle(DialogFragment.STYLE_NORMAL,R.style.DialogFragmentTheme);
+                    dialogFragment.show(ft, "dialog");*/
         });
         holder.tweet.setText(arrstrTweets.get(position).getTweet());
 
@@ -116,25 +143,39 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 viewImages(position, 3);
             }
         });
-        holder.likes.setText(" "+intLikes);
+
+
+        holder.numberofComents.setText(""+  arrstrTweets.get(position).getTweetsComments().size());
+
+        holder.likes.setText(" "+arrstrTweets.get(position).getLikes());
 
         holder.imageFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
+
             public void onClick(View v) {
-                isFavorite = !isFavorite;
-                holder.likes.setText(" "+intLikes);
+
+
+
+
+
                 if (
-                        isFavorite
+                        arrstrTweets.get(position).getIsLike()
                         ) {
 
                     holder.imageFavorite.setImageResource(R.drawable.ic_favorite);
-                    intLikes = intLikes + 1;
+                    arrstrTweets.get(position).setLikes(arrstrTweets.get(position).getLikes()-1);
+                    arrstrTweets.get(position).setIsLike(false);
+                    holder.likes.setText(arrstrTweets.get(position).getLikes()+"");
 
                 } else {
                     holder.imageFavorite.setImageResource(R.drawable.ic_favorite_clicked);
-                    intLikes = intLikes - 1;
+                    arrstrTweets.get(position).setLikes(arrstrTweets.get(position).getLikes()+1);
+                    arrstrTweets.get(position).setIsLike(true);
+                    holder.likes.setText(arrstrTweets.get(position).getLikes()+"");
                 }
+
             }
+
         });
         validateImage(arrstrTweets.get(position),holder.image1,holder.image2, holder.image3 ,
                 holder.image4 , holder.tvForCountImages, holder.rl, holder.linearLayoutdown, holder.linearLayoutup);
@@ -272,13 +313,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             likesView = itemView.findViewById(R.id.row_view_tv_seccion_likes);
 
             tweet = itemView.findViewById(R.id.row_view_tv_tweet_view);
-            parentLayout = itemView.findViewById(R.id.parent_layout);
-            likes = itemView.findViewById(R.id.row_view_tv_likes);
-            likesView = itemView.findViewById(R.id.seccion_likes);
 
-            tweet = itemView.findViewById(R.id.tweet_view);
+            likes = itemView.findViewById(R.id.row_view_tv_likes);
+
+
             parentLayout = itemView.findViewById(R.id.activity_main_dlMain);
-            likes = itemView.findViewById(R.id.likes);
 
 
             image1 = itemView.findViewById(R.id.row_view_iv_image1);
@@ -292,8 +331,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             numberofComents = itemView.findViewById(R.id.row_view_iv_number_of_coments);
             linearLayoutdown = itemView.findViewById(R.id.row_view_linear_layout_down);
             llDetailActivity = itemView.findViewById(R.id.row_view_ll_detail_activity);
-            linearLayout = itemView.findViewById(R.id.linear_view);
-            relativeLayoutComments = itemView.findViewById(R.id.row_view_rlViewComments);
+
 
         }
     }

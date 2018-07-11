@@ -192,6 +192,7 @@
                     android:layout_height="wrap_content"
                     android:text=""
                     android:layout_marginRight="8dp"
+                    android:layout_marginLeft="8dp"
                     android:layout_below="@id/row_view_linear_layout_imageview"
                     android:layout_toLeftOf="@id/row_view_tv_seccion_likes"
                     />
