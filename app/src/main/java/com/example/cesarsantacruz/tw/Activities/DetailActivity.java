@@ -20,13 +20,11 @@ public class DetailActivity extends AppCompatActivity {
     ArrayList<TwitterFeed> arrstrTweets = new ArrayList<>();
     int intLikesCount = 0;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-        rvDetailActivity = findViewById(R.id.activity_detail_recycler_view);
+    rvDetailActivity = findViewById(R.id.activity_detail_recycler_view);
         LinearLayoutManager manager = new LinearLayoutManager(getApplicationContext(),
                 LinearLayoutManager.VERTICAL, false);
         rvDetailActivity.setLayoutManager(manager);
@@ -36,10 +34,6 @@ public class DetailActivity extends AppCompatActivity {
         arrstrTweets.addAll(tweeter.getTweetsComments());
         rvDetailActivityAdapter = new RecyclerViewAdapterDetailActivity(this, arrstrTweets);
         rvDetailActivity.setAdapter(rvDetailActivityAdapter);
-
-
-
-
     }
     public void getData () {
 
@@ -53,6 +47,7 @@ public class DetailActivity extends AppCompatActivity {
        arrUrl.add("http://www.multimedios.com/files/article_main/uploads/2017/03/14/58c82f951b5c4.jpeg");
 
     TwitterFeed modelTweet = new TwitterFeed();
+
 
 
 
