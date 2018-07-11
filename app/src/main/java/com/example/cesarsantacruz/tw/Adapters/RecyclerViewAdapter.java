@@ -24,7 +24,7 @@
 
         import java.util.ArrayList;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final int NUMPIC = 4;
     private RecyclerView mRecyclerView;
     Context context;
@@ -33,17 +33,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     int intLikes = 0;
 
 
-
     public RecyclerViewAdapter(Context context, ArrayList<TwitterFeed> arrstrTweets) {
         this.context = context;
         this.arrstrTweets = arrstrTweets;
     }
-
-
-    /*public void addData (ArrayList<TwitterFeed> arrstrTweets) {
-        this.arrstrTweets = arrstrTweets;
-        //notifyDataSetChanged();
-    }*/
 
     //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     @NonNull
@@ -57,7 +50,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder2, final int position) {
-        final ViewHolder holder = (ViewHolder)holder2;
+        final ViewHolder holder = (ViewHolder) holder2;
 
         if (
                 arrstrTweets.get(position).getPicture() == 0
@@ -74,6 +67,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             }
         });
         holder.tvUserName.setText(arrstrTweets.get(position).getUser());
+
         holder.likesView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,20 +75,21 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 context.startActivity(intent);
             }
         });
-        holder.relativeLayoutComments.setOnClickListener(new View.OnClickListener() {
+
+        holder.imageComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, CommentsActivity.class);
                 context.startActivity(intent);
             }
         });
-        holder.tweet.setText(arrstrTweets.get(position).getTweet());
 
+        holder.tweet.setText(arrstrTweets.get(position).getTweet());
 
         holder.image1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                 viewImages(position, 0);
+                viewImages(position, 0);
             }
         });
 
@@ -116,13 +111,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 viewImages(position, 3);
             }
         });
-        holder.likes.setText(" "+intLikes);
+        holder.likes.setText(" " + intLikes);
 
         holder.imageFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 isFavorite = !isFavorite;
-                holder.likes.setText(" "+intLikes);
+                holder.likes.setText(" " + intLikes);
                 if (
                         isFavorite
                         ) {
@@ -136,19 +131,20 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 }
             }
         });
-        validateImage(arrstrTweets.get(position),holder.image1,holder.image2, holder.image3 ,
-                holder.image4 , holder.tvForCountImages, holder.rl, holder.linearLayoutdown, holder.linearLayoutup);
-
+        validateImage(arrstrTweets.get(position), holder.image1, holder.image2, holder.image3,
+                holder.image4, holder.tvForCountImages, holder.rl, holder.linearLayoutdown, holder.linearLayoutup);
 
     }
-    private void viewImages(int position, int imagesPosition){
+
+    private void viewImages(int position, int imagesPosition) {
         Intent intent = new Intent(context, GalleryActivity.class);
         Bundle b = new Bundle();
         b.putStringArrayList("image", arrstrTweets.get(position).getUrlPictures());
-        b.putInt("position",imagesPosition);
+        b.putInt("position", imagesPosition);
         intent.putExtras(b);
         context.startActivity(intent);
     }
+
     private void validateImage(TwitterFeed imageTweet,
                                ImageView image1,
                                ImageView image2,
@@ -156,76 +152,75 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                                ImageView image4,
                                TextView textQuantity,
                                RelativeLayout rl,
-                                LinearLayout linearlayoutdown,
-                                LinearLayout linearlayoutup)
-        {
+                               LinearLayout linearlayoutdown,
+                               LinearLayout linearlayoutup) {
 
-            /*CASE*/
-            if (imageTweet.getUrlPictures().size() < 1) {
-                image1.setVisibility(View.GONE);
-                image2.setVisibility(View.GONE);
-                image3.setVisibility(View.GONE);
-                image4.setVisibility(View.GONE);
-                textQuantity.setVisibility(View.GONE);
+        /*CASE*/
+        if (imageTweet.getUrlPictures().size() < 1) {
+            image1.setVisibility(View.GONE);
+            image2.setVisibility(View.GONE);
+            image3.setVisibility(View.GONE);
+            image4.setVisibility(View.GONE);
+            textQuantity.setVisibility(View.GONE);
 
-            } else if (imageTweet.getUrlPictures().size() < 2) {
-                Picasso.get().load(imageTweet.getUrlPictures().get(0)).into(image1);
-                image1.setVisibility(View.VISIBLE);
-                image2.setVisibility(View.GONE);
-                image3.setVisibility(View.GONE);
-                image4.setVisibility(View.GONE);
-                textQuantity.setVisibility(View.GONE);
-                linearlayoutdown.setVisibility(View.GONE);
+        } else if (imageTweet.getUrlPictures().size() < 2) {
+            Picasso.get().load(imageTweet.getUrlPictures().get(0)).into(image1);
+            image1.setVisibility(View.VISIBLE);
+            image2.setVisibility(View.GONE);
+            image3.setVisibility(View.GONE);
+            image4.setVisibility(View.GONE);
+            textQuantity.setVisibility(View.GONE);
+            linearlayoutdown.setVisibility(View.GONE);
 
-            } else if (imageTweet.getUrlPictures().size() < 3) {
-                Picasso.get().load(imageTweet.getUrlPictures().get(0)).into(image1);
-                Picasso.get().load(imageTweet.getUrlPictures().get(1)).into(image2);
-                image1.setVisibility(View.VISIBLE);
-                image2.setVisibility(View.VISIBLE);
-                image3.setVisibility(View.GONE);
-                image4.setVisibility(View.GONE);
-                textQuantity.setVisibility(View.GONE);
-            } else if (imageTweet.getUrlPictures().size() < 4) {
-                Picasso.get().load(imageTweet.getUrlPictures().get(0)).into(image1);
-                Picasso.get().load(imageTweet.getUrlPictures().get(1)).into(image2);
-                Picasso.get().load(imageTweet.getUrlPictures().get(2)).into(image3);
-                image1.setVisibility(View.VISIBLE);
-                image2.setVisibility(View.VISIBLE);
-                image3.setVisibility(View.VISIBLE);
-                image4.setVisibility(View.GONE);
-                textQuantity.setVisibility(View.GONE);
-                rl.setVisibility(View.GONE);
-                linearlayoutdown.setVisibility(View.VISIBLE);
-            } else if (imageTweet.getUrlPictures().size() < 5) {
-                Picasso.get().load(imageTweet.getUrlPictures().get(0)).into(image1);
-                Picasso.get().load(imageTweet.getUrlPictures().get(1)).into(image2);
-                Picasso.get().load(imageTweet.getUrlPictures().get(2)).into(image3);
-                Picasso.get().load(imageTweet.getUrlPictures().get(3)).into(image4);
-                image1.setVisibility(View.VISIBLE);
-                image2.setVisibility(View.VISIBLE);
-                image3.setVisibility(View.VISIBLE);
-                image4.setVisibility(View.VISIBLE);
-                textQuantity.setVisibility(View.GONE);
-                rl.setVisibility(View.VISIBLE);
-                linearlayoutdown.setVisibility(View.VISIBLE);
+        } else if (imageTweet.getUrlPictures().size() < 3) {
+            Picasso.get().load(imageTweet.getUrlPictures().get(0)).into(image1);
+            Picasso.get().load(imageTweet.getUrlPictures().get(1)).into(image2);
+            image1.setVisibility(View.VISIBLE);
+            image2.setVisibility(View.VISIBLE);
+            image3.setVisibility(View.GONE);
+            image4.setVisibility(View.GONE);
+            textQuantity.setVisibility(View.GONE);
+        } else if (imageTweet.getUrlPictures().size() < 4) {
+            Picasso.get().load(imageTweet.getUrlPictures().get(0)).into(image1);
+            Picasso.get().load(imageTweet.getUrlPictures().get(1)).into(image2);
+            Picasso.get().load(imageTweet.getUrlPictures().get(2)).into(image3);
+            image1.setVisibility(View.VISIBLE);
+            image2.setVisibility(View.VISIBLE);
+            image3.setVisibility(View.VISIBLE);
+            image4.setVisibility(View.GONE);
+            textQuantity.setVisibility(View.GONE);
+            rl.setVisibility(View.GONE);
+            linearlayoutdown.setVisibility(View.VISIBLE);
+        } else if (imageTweet.getUrlPictures().size() < 5) {
+            Picasso.get().load(imageTweet.getUrlPictures().get(0)).into(image1);
+            Picasso.get().load(imageTweet.getUrlPictures().get(1)).into(image2);
+            Picasso.get().load(imageTweet.getUrlPictures().get(2)).into(image3);
+            Picasso.get().load(imageTweet.getUrlPictures().get(3)).into(image4);
+            image1.setVisibility(View.VISIBLE);
+            image2.setVisibility(View.VISIBLE);
+            image3.setVisibility(View.VISIBLE);
+            image4.setVisibility(View.VISIBLE);
+            textQuantity.setVisibility(View.GONE);
+            rl.setVisibility(View.VISIBLE);
+            linearlayoutdown.setVisibility(View.VISIBLE);
 
-            } else {
-                Picasso.get().load(imageTweet.getUrlPictures().get(0)).into(image1);
-                Picasso.get().load(imageTweet.getUrlPictures().get(1)).into(image2);
-                Picasso.get().load(imageTweet.getUrlPictures().get(2)).into(image3);
-                Picasso.get().load(imageTweet.getUrlPictures().get(3)).into(image4);
-                image1.setVisibility(View.VISIBLE);
-                image2.setVisibility(View.VISIBLE);
-                image3.setVisibility(View.VISIBLE);
-                image4.setVisibility(View.VISIBLE);
-                textQuantity.setVisibility(View.VISIBLE);
-                textQuantity.setText("+" + (imageTweet.getUrlPictures().size() - NUMPIC));
-                rl.setVisibility(View.VISIBLE);
-                linearlayoutdown.setVisibility(View.VISIBLE);
+        } else {
+            Picasso.get().load(imageTweet.getUrlPictures().get(0)).into(image1);
+            Picasso.get().load(imageTweet.getUrlPictures().get(1)).into(image2);
+            Picasso.get().load(imageTweet.getUrlPictures().get(2)).into(image3);
+            Picasso.get().load(imageTweet.getUrlPictures().get(3)).into(image4);
+            image1.setVisibility(View.VISIBLE);
+            image2.setVisibility(View.VISIBLE);
+            image3.setVisibility(View.VISIBLE);
+            image4.setVisibility(View.VISIBLE);
+            textQuantity.setVisibility(View.VISIBLE);
+            textQuantity.setText("+" + (imageTweet.getUrlPictures().size() - NUMPIC));
+            rl.setVisibility(View.VISIBLE);
+            linearlayoutdown.setVisibility(View.VISIBLE);
 
-            }
-            /*END CASE*/
         }
+        /*END CASE*/
+    }
 
     //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     @Override
@@ -269,38 +264,24 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             imageComment = itemView.findViewById(R.id.row_view_iv_comentario);
             imageFavoriteClicked = itemView.findViewById(R.id.row_view_iv_favorite);
 
-            likesView = itemView.findViewById(R.id.row_view_tv_seccion_likes);
+            likesView =itemView. findViewById(R.id.row_view_tv_seccion_likes);
 
             tweet = itemView.findViewById(R.id.row_view_tv_tweet_view);
-            parentLayout = itemView.findViewById(R.id.parent_layout);
-            likes = itemView.findViewById(R.id.row_view_tv_likes);
-            likesView = itemView.findViewById(R.id.seccion_likes);
-
-            tweet = itemView.findViewById(R.id.tweet_view);
             parentLayout = itemView.findViewById(R.id.activity_main_dlMain);
-            likes = itemView.findViewById(R.id.likes);
-
+            likes = itemView.findViewById(R.id.row_view_tv_likes);
 
             image1 = itemView.findViewById(R.id.row_view_iv_image1);
             image2 = itemView.findViewById(R.id.row_view_image2);
             image3 = itemView.findViewById(R.id.row_view_image3);
             image4 = itemView.findViewById(R.id.row_view_image4);
-
             tvForCountImages = itemView.findViewById(R.id.row_view_tvForCountImages);
             rl = itemView.findViewById(R.id.rl);
             linearLayout = itemView.findViewById(R.id.row_view_linear_layout_imageview);
-            numberofComents = itemView.findViewById(R.id.row_view_iv_number_of_coments);
+            numberofComents =itemView.findViewById(R.id.row_view_iv_number_of_coments);
             linearLayoutdown = itemView.findViewById(R.id.row_view_linear_layout_down);
             llDetailActivity = itemView.findViewById(R.id.row_view_ll_detail_activity);
-            linearLayout = itemView.findViewById(R.id.linear_view);
-            relativeLayoutComments = itemView.findViewById(R.id.row_view_rlViewComments);
 
         }
     }
 //----------------------------------------------------------------------------------------------------------------------
-
-
-
-
-
 }

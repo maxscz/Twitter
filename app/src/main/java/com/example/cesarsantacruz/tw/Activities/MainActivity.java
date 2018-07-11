@@ -28,13 +28,30 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.cesarsantacruz.tw.Connection.Ws;
 import com.example.cesarsantacruz.tw.Interface.RefreshItemTouchHelperListener;
 import com.example.cesarsantacruz.tw.R;
 import com.example.cesarsantacruz.tw.Adapters.RecyclerViewAdapter;
 import com.example.cesarsantacruz.tw.Models.TwitterFeed;
 import com.example.cesarsantacruz.tw.Utils.RefreshItemTouchHelper;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, RefreshItemTouchHelperListener {
 
@@ -47,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     DrawerLayout drawer;
     SwipeRefreshLayout swipeToRefresh;
 
-    private static final String TAG = "MainActivity";
+    private static final String TAG = MainActivity.class.getName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,8 +103,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //                                                  //Ubicamos el recycler view en nuestro archivo XML
         mRecyclerView = findViewById(R.id.activity_main_rvmain);
 
-        //                                                  //Llenamos de informacion nuestro RecyclerView
-        GetData();
         //                                                  //Configuración del adaptador para el RecyclerView
         recyclerViewAdapter = new RecyclerViewAdapter(this, arrstrTweets);
         mRecyclerView.setAdapter(recyclerViewAdapter);
@@ -97,8 +112,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mRecyclerView.setLayoutManager(manager);
 
         //                                                  //Comienza el swipe to refresh gesture
-
-
         ItemTouchHelper.SimpleCallback itemTouchHelperCallBack = new RefreshItemTouchHelper(0,
                 ItemTouchHelper.LEFT, this);
         new ItemTouchHelper(itemTouchHelperCallBack).attachToRecyclerView(mRecyclerView);
@@ -116,7 +129,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onRefresh() {
                 Log.d(TAG, "onRefresh: ");
                 //                                                  //Llenamos de informacion nuestro RecyclerView
-                GetData();
 
                 (new Handler()).postDelayed(new Runnable() {
                     @Override
@@ -128,40 +140,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         });
         /*END-REFRESH*/
-
     }
 
-    public void GetData () {
-        arrstrTweets = new ArrayList<>();
-        ArrayList<String> arrUrl = new ArrayList<>();
-        arrUrl.add("https://www.viajaraitalia.com/wp-content/uploads/2009/09/venecia-de-noche.jpg");
-        arrUrl.add("https://www.mycoyote.es/blog/wp-content/uploads/2018/05/viajar-italia.jpg");
-        arrUrl.add("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMR4VJUaWuEbtiKnL53FIkW17VW5uVUc1ZKP7F9reVbsK0lOj7");
-       arrUrl.add("https://img.elcomercio.pe/files/ec_article_multimedia_gallery/uploads/2017/12/01/5a21bb359ff38.jpeg");
-       arrUrl.add("https://1.bp.blogspot.com/-z3iEVshe8Lc/T3oLv1ZqfLI/AAAAAAAADZw/Yr1oj08kZ3M/s1600/hacer.jpg");
-       arrUrl.add("http://www.multimedios.com/files/article_main/uploads/2017/03/14/58c82f951b5c4.jpeg");
+    final RequestQueue mRequestQueue = Volley.newRequestQueue(this);
+    JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+            (Request.Method.GET, Ws.FEED(), null, new Response.Listener<JSONObject>() {
 
-        TwitterFeed twitterFeed = new TwitterFeed("probando probando probando", "perro chido",
-                "@perro123", R.drawable.perro, R.drawable.perro, 4, 6,arrUrl);
-        arrstrTweets.add(twitterFeed);
+                @Override
+                public void onResponse(JSONObject response) {
+                    Log.d(TAG, "onResponse: " + response);
 
-        twitterFeed = new TwitterFeed("probando probando probando", "perro chido",
-                "@perro123", 0, R.drawable.perro, 23, 8, arrUrl);
-        arrstrTweets.add(twitterFeed);
+                }
+            }, new Response.ErrorListener() {
 
-        twitterFeed = new TwitterFeed("probando probando probando", "perro chido",
-                "@perro123", R.drawable.perro, R.drawable.perro, 22, 13, arrUrl);
-        arrstrTweets.add(twitterFeed);
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.d(TAG, "onErrorResponse: " + error);
+                }
+            });
 
-        twitterFeed = new TwitterFeed("probando probando probando", "perro chido",
-                "@perro123", R.drawable.perro, R.drawable.perro, 15, 6, arrUrl);
-        arrstrTweets.add(twitterFeed);
 
-        twitterFeed = new TwitterFeed("probando probando probando", "perro chido",
-                "@perro123", 0, R.drawable.perro, 4, 1,arrUrl);
-        arrstrTweets.add(twitterFeed);
-        */
-    }
     public void createNewTweet(TwitterFeed newTweet)
     {
         arrstrTweets.add(newTweet);
@@ -220,7 +218,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void signOut(MenuItem item) {
-        this.finish();
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     @Override

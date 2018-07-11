@@ -9,8 +9,6 @@
         android:title="@string/sign_out"
         app:itemIconTint="@color/colorDanger"
         android:onClick="signOut">
-
     </item>
-
 
 </menu>
