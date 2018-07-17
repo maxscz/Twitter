@@ -33,27 +33,38 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.cesarsantacruz.tw.Connection.TwitterRequest;
 import com.example.cesarsantacruz.tw.Connection.Ws;
 import com.example.cesarsantacruz.tw.Interface.RefreshItemTouchHelperListener;
+import com.example.cesarsantacruz.tw.Models.Person;
+import com.example.cesarsantacruz.tw.Models.Tweet;
 import com.example.cesarsantacruz.tw.R;
 import com.example.cesarsantacruz.tw.Adapters.RecyclerViewAdapter;
 import com.example.cesarsantacruz.tw.Models.TwitterFeed;
 import com.example.cesarsantacruz.tw.Utils.RefreshItemTouchHelper;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Array;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, RefreshItemTouchHelperListener {
+//======================================================================================================================
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
+        RefreshItemTouchHelperListener {
+    //                                                      //
+    //                                                      //
 
     int comments;
     FloatingActionButton fabNewTweet;
@@ -64,13 +75,58 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     DrawerLayout drawer;
     SwipeRefreshLayout swipeToRefresh;
     int intLikes = 0;
+    List<Tweet> listTweets;
 
     private static final String TAG = MainActivity.class.getName();
 
+    //------------------------------------------------------------------------------------------------------------------
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(
+            //                                              //
+            //                                              //
+            Bundle savedInstanceState
+    ) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        listTweets = new ArrayList<>();
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        drawer = (DrawerLayout) findViewById(R.id.activity_main_dlMain);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.activity_main_nvMain);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        setRecyclerView();
+
+        fabNewTweetSetClick();
+
+        receiveTweets();
+
+        setRefreshListener();
+    }
+
+    //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    private void setRecyclerView () {
+        //                                                  //Ubicamos el recycler view en nuestro archivo XML
+        mRecyclerView = findViewById(R.id.activity_main_rvmain);
+
+        //                                                  //Configuración del adaptador para el RecyclerView
+        recyclerViewAdapter = new RecyclerViewAdapter(this, arrstrTweets);
+        mRecyclerView.setAdapter(recyclerViewAdapter);
+
+        LinearLayoutManager manager = new LinearLayoutManager(getApplicationContext(),
+                LinearLayoutManager.VERTICAL, false);
+        mRecyclerView.setLayoutManager(manager);
+    }
+    //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    public void fabNewTweetSetClick() {
         fabNewTweet = findViewById(R.id.activity_main_fabNewTweet);
 
         fabNewTweet.setOnClickListener(new View.OnClickListener() {
@@ -95,29 +151,94 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 dialogFragment.show(ft, "dialog");
             }
         });
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+    }
+    //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+    public void receiveTweets () {
+        final RequestQueue mRequestQueue = Volley.newRequestQueue(this);
+        Map<String, String> headers = new HashMap<>();
+        headers.put("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1bmlxdWVfbmFtZSI6ImxpdHRsZUNlc2FyIiwic3ViIjoibGl0dGxlQ2VzYXIiLCJyb2xlIjoiVXNlciIsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3QvIiwiYXVkIjoiQW55IiwiZXhwIjoxNTMxOTI1Nzc0LCJuYmYiOjE1MzE4MzkzNzR9.e1XIDzra_HicLYrdAXvE5U7C9AaVC85RxFKlA9cjE8M ");
+        TwitterRequest twitterRequest = new TwitterRequest(Request.Method.GET, Ws.FEED(), new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(TAG, "onErrorResponse: " + error);
+            }
+        }, Tweet.class, headers, new Response.Listener() {
+            @Override
+            public void onResponse(Object response) {
+                Log.d(TAG, "onResponse: " + ((Tweet[]) response));
+            }
+        });
+        mRequestQueue.add(twitterRequest);
+    }
 
-         drawer = (DrawerLayout) findViewById(R.id.activity_main_dlMain);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
+    /* * /
+    public void receiveTweets(
+            //                                              //
+            //                                              //
+    ) {
+        final RequestQueue mRequestQueue = Volley.newRequestQueue(this);
+        JsonArrayRequest jsonObjectRequest = new JsonArrayRequest
+                (Request.Method.GET, Ws.FEED(), null, new Response.Listener<JSONArray>() {
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.activity_main_nvMain);
-        navigationView.setNavigationItemSelectedListener(this);
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        Log.d(TAG, "onResponse: " + response);
 
-        //                                                  //Ubicamos el recycler view en nuestro archivo XML
-        mRecyclerView = findViewById(R.id.activity_main_rvmain);
+                        try {
 
-        //                                                  //Configuración del adaptador para el RecyclerView
-        recyclerViewAdapter = new RecyclerViewAdapter(this, arrstrTweets);
-        mRecyclerView.setAdapter(recyclerViewAdapter);
 
-        LinearLayoutManager manager = new LinearLayoutManager(getApplicationContext(),
-                LinearLayoutManager.VERTICAL, false);
-        mRecyclerView.setLayoutManager(manager);
+                            for (int intI = 0; intI < response.length(); intI = intI + 1) {
+                                JSONObject jsonObject = response.getJSONObject(intI);
+                                JSONObject jsonPerson = jsonObject.getJSONObject("person");
+                                Tweet tweet = new Tweet();
+                                tweet.setPerson(new Person());
 
+                                tweet.getPerson().setApplicationUser(jsonPerson.getString(""));
+                                tweet.getPerson().setGroup(jsonPerson.getString(""));
+                                tweet.getPerson().setTweets((Array)jsonPerson.get(""));
+                                tweet.getPerson().setId(jsonPerson.getInt(""));
+                                tweet.getPerson().setName(jsonPerson.getString(""));
+                                tweet.getPerson().setAt(jsonPerson.getString(""));
+                                tweet.getPerson().setPhoto(jsonPerson.getString(""));
+                                tweet.getPerson().setEmail(jsonPerson.getString(""));
+                                tweet.getPerson().setGroupId(jsonPerson.getInt(""));
+
+                                tweet.setResponses(jsonObject.getString(""));
+                                tweet.setId(jsonObject.getInt(""));
+                                tweet.setLikes(jsonObject.getInt(""));
+                                tweet.setDatePublished(jsonObject.getString(""));
+                                tweet.setText(jsonObject.getString(""));
+                                tweet.setImages(jsonObject.getString(""));
+                                tweet.setPersonId(jsonObject.getInt(""));
+                                tweet.setResponseId(jsonObject.getInt(""));
+                                tweet.setLikes_Z(jsonObject.getInt(""));
+                                tweet.setImages_Z(jsonObject.getString(""));
+
+                                listTweets.add(tweet);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                    }
+                }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap headers = new HashMap();
+                headers.put("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1bmlxdWVfbmFtZSI6ImxpdHRsZUNlc2FyIiwic3ViIjoibGl0dGxlQ2VzYXIiLCJyb2xlIjoiVXNlciIsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3QvIiwiYXVkIjoiQW55IiwiZXhwIjoxNTMxOTI1Nzc0LCJuYmYiOjE1MzE4MzkzNzR9.e1XIDzra_HicLYrdAXvE5U7C9AaVC85RxFKlA9cjE8M ");
+                return headers;
+            }
+        };
+        mRequestQueue.add(jsonObjectRequest);
+    }
+    /**/
+    public void setRefreshListener () {
         //                                                  //Comienza el swipe to refresh gesture
         ItemTouchHelper.SimpleCallback itemTouchHelperCallBack = new RefreshItemTouchHelper(0,
                 ItemTouchHelper.LEFT, this);
@@ -136,6 +257,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onRefresh() {
                 Log.d(TAG, "onRefresh: ");
                 //                                                  //Llenamos de informacion nuestro RecyclerView
+                receiveTweets();
 
                 (new Handler()).postDelayed(new Runnable() {
                     @Override
@@ -146,39 +268,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }, 2500);
             }
         });
-        /*END-REFRESH*/
     }
 
-    final RequestQueue mRequestQueue = Volley.newRequestQueue(this);
-    JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-            (Request.Method.GET, Ws.FEED(), null, new Response.Listener<JSONObject>() {
-
-                @Override
-                public void onResponse(JSONObject response) {
-                    Log.d(TAG, "onResponse: " + response);
-
-                }
-            }, new Response.ErrorListener() {
-
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Log.d(TAG, "onErrorResponse: " + error);
-                }
-            });
-
-
+    //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     public void createNewTweet(TwitterFeed newTweet)
     {
         arrstrTweets.add(newTweet);
         recyclerViewAdapter.notifyDataSetChanged();
     }
+
+    //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     public void addCommentToTwitter(TwitterFeed newTweet, int position)
     {
         arrstrTweets.get(position).getTweetsComments().add(newTweet);
         recyclerViewAdapter.notifyDataSetChanged();
     }
 
-
+    //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     @Override
     public void onBackPressed() {
       //  DrawerLayout drawer = (DrawerLayout) findViewById(R.id.activity_main_dlMain);
@@ -189,6 +295,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+    //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -223,33 +330,39 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+    //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     @Override
-    //Creacion de menu
+    //                                                      //Creacion de menu
     public boolean onCreateOptionsMenu(
             Menu menu) {
         getMenuInflater().inflate(R.menu.directory, menu);
         return true;
     }
-
+    //------------------------------------------------------------------------------------------------------------------
     public void signOut(MenuItem item) {
         logOut();
     }
 
+    //------------------------------------------------------------------------------------------------------------------
     @Override
     public void onSwipe(RecyclerView.ViewHolder viewHolder, int intDirection, int intPosition) {
 
     }
 
+    //------------------------------------------------------------------------------------------------------------------
     @Override
     public void onItemMove(int intFromPosition, int intToPosition) {
 
     }
 
+    //------------------------------------------------------------------------------------------------------------------
     private void logOut(){
         Intent intent = new Intent ( this, LoginActivity.class);
                 startActivity(intent);
                 finish();
     }
+
+    //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     public void callToFragmentInbox(int position){
         Bundle b = new Bundle();
         b.putString("Type", "Coment");
@@ -266,7 +379,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         dialogFragment.setArguments(b);
         dialogFragment.setStyle(DialogFragment.STYLE_NORMAL,R.style.DialogFragmentTheme);
         dialogFragment.show(ft, "dialog");
-
 
     }
 }

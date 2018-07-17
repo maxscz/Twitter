@@ -136,10 +136,7 @@ public class LoginActivity extends AppCompatActivity implements TextWatcher, Vie
         }
     }
 
-
-
-
-
+    //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
     private void postLogin(final String username_I, final String password_I)
     {
         final RequestQueue mRequestQueue = Volley.newRequestQueue(this);
@@ -149,7 +146,7 @@ public class LoginActivity extends AppCompatActivity implements TextWatcher, Vie
                     @Override
                     public void onResponse(String response) {
                         // response
-                        JSONObject jsonResponse= null;
+                        JSONObject jsonResponse = null;
                         try {
                             jsonResponse = new JSONObject(response);
                         } catch (JSONException e) {
@@ -193,7 +190,7 @@ public class LoginActivity extends AppCompatActivity implements TextWatcher, Vie
                 Map<String, String> params = new HashMap<String, String>();
 
                 params.put("Accepts", "application/json");
-               /* params.put("Accept-Language", "en-gb");
+              /*params.put("Accept-Language", "en-gb");
                 params.put("Audience", "Any");
                 params.put("Cache-Control", "no-cache");*/
 
@@ -209,6 +206,5 @@ public class LoginActivity extends AppCompatActivity implements TextWatcher, Vie
         mRequestQueue.add(postRequest);
     }
 }
-//----------------------------------------------------------------------------------------------------------------------
 //======================================================================================================================
 /*END TASK*/

@@ -1,42 +1,38 @@
+package com.example.cesarsantacruz.tw.Adapters;
 
-        package com.example.cesarsantacruz.tw.Adapters;
+import android.app.Activity;
+import android.app.DialogFragment;
+import android.app.FragmentTransaction;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
-        import android.app.Activity;
-        import android.app.DialogFragment;
-        import android.app.FragmentTransaction;
-        import android.content.Context;
-        import android.content.Intent;
-        import android.os.Bundle;
-        import android.support.annotation.NonNull;
-        import android.support.v7.widget.RecyclerView;
-        import android.view.LayoutInflater;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.widget.ImageView;
-        import android.widget.LinearLayout;
-        import android.widget.RelativeLayout;
-        import android.widget.TextView;
+import com.example.cesarsantacruz.tw.Activities.CommentsActivity;
+import com.example.cesarsantacruz.tw.Activities.DetailActivity;
+import com.example.cesarsantacruz.tw.Activities.GalleryActivity;
+import com.example.cesarsantacruz.tw.Activities.LikesActivity;
+import com.example.cesarsantacruz.tw.Activities.MainActivity;
+import com.example.cesarsantacruz.tw.Activities.NewTweetFragmentDialog;
+import com.example.cesarsantacruz.tw.R;
+import com.example.cesarsantacruz.tw.Models.TwitterFeed;
+import com.squareup.picasso.Picasso;
 
-        import com.example.cesarsantacruz.tw.Activities.CommentsActivity;
-        import com.example.cesarsantacruz.tw.Activities.DetailActivity;
-        import com.example.cesarsantacruz.tw.Activities.GalleryActivity;
-        import com.example.cesarsantacruz.tw.Activities.LikesActivity;
-        import com.example.cesarsantacruz.tw.Activities.MainActivity;
-        import com.example.cesarsantacruz.tw.Activities.NewTweetFragmentDialog;
-        import com.example.cesarsantacruz.tw.R;
-        import com.example.cesarsantacruz.tw.Models.TwitterFeed;
-        import com.squareup.picasso.Picasso;
-
-        import java.util.ArrayList;
+import java.util.ArrayList;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final int NUMPIC = 4;
     private RecyclerView mRecyclerView;
     Context context;
     private ArrayList<TwitterFeed> arrstrTweets;
-
-
-
 
     public RecyclerViewAdapter(Context context, ArrayList<TwitterFeed> arrstrTweets) {
         this.context = context;
@@ -297,9 +293,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
             likes = itemView.findViewById(R.id.row_view_tv_likes);
 
-
             parentLayout = itemView.findViewById(R.id.activity_main_dlMain);
-
 
             image1 = itemView.findViewById(R.id.row_view_iv_image1);
             image2 = itemView.findViewById(R.id.row_view_image2);
@@ -312,8 +306,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             numberofComents = itemView.findViewById(R.id.row_view_iv_number_of_coments);
             linearLayoutdown = itemView.findViewById(R.id.row_view_linear_layout_down);
             llDetailActivity = itemView.findViewById(R.id.row_view_ll_detail_activity);
-
         }
     }
-//----------------------------------------------------------------------------------------------------------------------
 }
